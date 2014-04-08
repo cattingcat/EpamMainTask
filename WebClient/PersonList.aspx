@@ -33,7 +33,7 @@
                   <th>Delete</th>
                 </tr>
               </thead>
-              <tbody runat="server" id="tableBody">                
+              <tbody runat="server" id="tableBody" enableviewstate="false">                
               </tbody>
             </table>
             <label runat="server" id="elapsedTime"> </label>
