@@ -22,7 +22,7 @@ namespace DataAccessors.Entity
         public string Name { get; set; }
         [Column(ColumnName = "LastNameColumn", ColumnType = DbType.String)]
         public string LastName { get; set; }
-        [Column(ColumnName = "dob", ColumnType = DbType.Date)]
+        [Column(ColumnName = "dob", ColumnType = DbType.DateTime)]
         public DateTime DayOfBirth { get; set; }
         
         // from ORM-relation version

@@ -16,7 +16,7 @@ namespace WinFormsClient
     public partial class MainFormc : Form
     {
         private IAccessor<Person> accessor;
-        private string appConfigConnectionString = "ServiceDB";
+        private string appConfigConnectionString = "CompactDB";
 
         public MainFormc()
         {
@@ -48,9 +48,9 @@ namespace WinFormsClient
                 case 2:
                     return new ADOPersonAccessor(appConfigConnectionString);
                 case 3:
-                    return new DirectoryPersonAccessor(@"C:\Users\pc-1\Desktop\MyOrm\DataProject\Data\FolderDBb");
+                    return new DirectoryPersonAccessor(@"App_Data\FolderDBb");
                 case 4:
-                    return new FilePersonAccessor(@"C:\Users\pc-1\Desktop\MyOrm\DataProject\Data\FilePersonDB.txt");
+                    return new FilePersonAccessor(@"App_Data\FilePersonDB.txt");
                 case 5:
                     return new MemoryPersonAccessor();
             }

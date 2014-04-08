@@ -45,8 +45,7 @@ memory accessor    - 5");
             IAccessor<Person> accessor = null;
             int resp = int.Parse(Console.ReadLine());
 
-            string appConfigConnectionString = "ServiceDB";
-
+            string appConfigConnectionString = "CompactDB";
             switch (resp)
             {
                 case 1:
@@ -56,10 +55,10 @@ memory accessor    - 5");
                     accessor = new ADOPersonAccessor(appConfigConnectionString);
                     break;
                 case 3:
-                    accessor = new DirectoryPersonAccessor(@"C:\Users\pc-1\Desktop\MyOrm\DataProject\bin\Debug\Data\FolderDBb");
+                    accessor = new DirectoryPersonAccessor(@"App_Data\FolderDBb");
                     break;
                 case 4:
-                    accessor = new FilePersonAccessor(@"C:\Users\pc-1\Desktop\MyOrm\DataProject\bin\Debug\Data\FilePersonDB.txt");
+                    accessor = new FilePersonAccessor(@"App_Data\FilePersonDB.txt");
                     break;
                 case 5:
                     accessor = new MemoryPersonAccessor();

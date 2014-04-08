@@ -3,6 +3,7 @@ using DataAccessors.Data;
 using DataAccessors.Entity;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Routing;
@@ -17,11 +18,17 @@ namespace WebClient
 
         protected void Application_Start(object sender, EventArgs e)
         {
-            string appConfigConnectionString = "ServiceDB";                                    
+            string appConfigConnectionString = "CompactDB";
+            
+            // wow
+            string path = Server.MapPath(@"bin");
+            AppDomain.CurrentDomain.SetData("DataDirectory", path);
+     
+
             Accessors.Add("orm", new OrmPersonAccessor(appConfigConnectionString));
             Accessors.Add("ado", new ADOPersonAccessor(appConfigConnectionString));
-            Accessors.Add("file", new FilePersonAccessor(@"C:\Users\pc-1\Desktop\MyOrm\DataProject\bin\Debug\Data\FilePersonDB.txt"));
-            Accessors.Add("dir", new DirectoryPersonAccessor(@"C:\Users\pc-1\Desktop\MyOrm\DataProject\bin\Debug\Data\FolderDBb"));
+            Accessors.Add("file", new FilePersonAccessor(path + @"\App_Data\FilePersonDB.txt"));
+            Accessors.Add("dir", new DirectoryPersonAccessor(path + @"\App_Data\FolderDBb"));
             Accessors.Add("mem", new MemoryPersonAccessor());
 
             //RouteCollection
