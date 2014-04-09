@@ -59,6 +59,7 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="PersonList.aspx" />
+    <Content Include="PersonRowControl.ascx" />
     <Content Include="scripts\script.js" />
     <Content Include="styles\style.css" />
     <Content Include="Web.config" />
@@ -74,9 +75,24 @@
     <Compile Include="PersonList.aspx.designer.cs">
       <DependentUpon>PersonList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PersonRowControl.ascx.cs">
+      <DependentUpon>PersonRowControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PersonRowControl.ascx.designer.cs">
+      <DependentUpon>PersonRowControl.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Site.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
