@@ -14,18 +14,13 @@ namespace DataAccessors.Accessors
     {
         private MyORM orm;
 
-        public OrmPhoneAccessor()
+        public OrmPhoneAccessor(string appConfigConnectionString)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["ServiceDB"].ConnectionString;
-            string providerName = ConfigurationManager.ConnectionStrings["ServiceDB"].ProviderName;
+            string connectionString = ConfigurationManager.ConnectionStrings[appConfigConnectionString].ConnectionString;
+            string providerName = ConfigurationManager.ConnectionStrings[appConfigConnectionString].ProviderName;
             DbProviderFactory factory = DbProviderFactories.GetFactory(providerName);
-
-            orm = new MyORM(factory, connectionString, typeof(Phone));
-        }
-
-        public OrmPhoneAccessor(MyORM orm)
-        {
-            this.orm = orm;
+            orm = new MyORM(factory, connectionString, typeof(Phone), typeof(Person));
+            orm.RelationsEnabled = true;
         }
 
         public ICollection<Phone> GetAll()

@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace DataAccessors.Entity
 {
     [Serializable]
-    [Table(TableName = "PersonTable")]
+    [Table(TableName = "PersonTbl")]
     public class Person
     {
         public Person()
@@ -16,17 +16,14 @@ namespace DataAccessors.Entity
             DayOfBirth = DateTime.Now;
         }
 
-        [Id(ColumnName = "identificator", ColumnType = DbType.Int32)]
-        public int ID { get; set; }
-        [Column(ColumnName = "NameColumn", ColumnType = DbType.String)]
+        [Id(ColumnName = "id", ColumnType = DbType.Int32)]
+        public int Id { get; set; }
+        [Column(ColumnName = "name", ColumnType = DbType.String)]
         public string Name { get; set; }
-        [Column(ColumnName = "LastNameColumn", ColumnType = DbType.String)]
+        [Column(ColumnName = "lastname", ColumnType = DbType.String)]
         public string LastName { get; set; }
         [Column(ColumnName = "dob", ColumnType = DbType.DateTime)]
-        public DateTime DayOfBirth { get; set; }
-        
-        // from ORM-relation version
-        /*
+        public DateTime DayOfBirth { get; set; }       
         [XmlIgnore]
         [Many(SecondTable = "PhoneTbl", SecondColumn = "person_id")]
         public ICollection<Phone> Phones { get; set; }
@@ -34,14 +31,13 @@ namespace DataAccessors.Entity
         public override string ToString()
         {
             return String.Format("id: {0, 5}, name: {1, 10}, lastname: {2, 10}, DayOfBirth: {3}, Phones: {4, 3}",
-                ID, Name.Trim(), LastName.Trim(), DayOfBirth.ToString("d MMM yyyy"), Phones == null ? 0 : Phones.Count);
+                Id, Name.Trim(), LastName.Trim(), DayOfBirth.ToString("d MMM yyyy"), Phones == null ? 0 : Phones.Count);
         }
-        */
-
-        public override string ToString()
+        
+        /* public override string ToString()
         {
             return String.Format("id: {0, 5}, name: {1, 10}, lastname: {2, 10}, DayOfBirth: {3}",
                 ID, Name.Trim(), LastName.Trim(), DayOfBirth.ToString("d MMM yyyy"));
-        }
+        } */
     }
 }

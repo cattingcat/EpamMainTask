@@ -36,7 +36,7 @@ namespace WinFormsClient
             dataGridView1.Rows.Clear();
             foreach (Person p in collection)
             {
-                dataGridView1.Rows.Add(p.ID, p.Name, p.LastName, p.DayOfBirth);
+                dataGridView1.Rows.Add(p.Id, p.Name, p.LastName, p.DayOfBirth);
             }
         }
         private IAccessor<Person> MakeAccessor(int id)

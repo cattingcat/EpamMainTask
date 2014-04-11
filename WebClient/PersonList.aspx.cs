@@ -37,7 +37,7 @@ namespace WebClient
         {
             Person p = new Person
             {
-                ID = int.Parse(idInput.Value),
+                Id = int.Parse(idInput.Value),
                 Name = nameInput.Value.Trim(),
                 LastName = lastNameInput.Value.Trim(),
                 DayOfBirth = DateTime.Parse(dateInput.Value)

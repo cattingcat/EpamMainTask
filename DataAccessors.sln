@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebClient", "WebClient\WebC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcClient", "MvcClient\MvcClient.csproj", "{5BEFB719-E66C-44AE-94E4-A7A902876EF0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataInitializer", "DataInitializer\DataInitializer.csproj", "{C3CED0DC-1D96-4233-B673-3BED49428F7D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{5BEFB719-E66C-44AE-94E4-A7A902876EF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BEFB719-E66C-44AE-94E4-A7A902876EF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BEFB719-E66C-44AE-94E4-A7A902876EF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3CED0DC-1D96-4233-B673-3BED49428F7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3CED0DC-1D96-4233-B673-3BED49428F7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3CED0DC-1D96-4233-B673-3BED49428F7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3CED0DC-1D96-4233-B673-3BED49428F7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

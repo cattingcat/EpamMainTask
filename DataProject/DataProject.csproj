@@ -53,46 +53,71 @@
     <Content Include="App_Data\CompactDatabase.sdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\FilePersonDB.txt">
+    <Content Include="App_Data\FileDbs\FilePersonDb.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\FileDbs\FilePhoneDb.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\FolderDBb\13.xml">
+    <Content Include="App_Data\FolderDb\Persons\0.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\FolderDBb\14.xml">
+    <Content Include="App_Data\FolderDb\Persons\1.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\FolderDBb\15.xml">
+    <Content Include="App_Data\FolderDb\Persons\2.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\FolderDBb\16.xml">
+    <Content Include="App_Data\FolderDb\Persons\3.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\FolderDBb\17.xml">
+    <Content Include="App_Data\FolderDb\Persons\4.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\FolderDBb\18.xml">
+    <Content Include="App_Data\FolderDb\Persons\5.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\FolderDBb\19.xml">
+    <Content Include="App_Data\FolderDb\Persons\6.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\FolderDBb\2.xml">
+    <Content Include="App_Data\FolderDb\Persons\7.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\FolderDBb\20.xml">
+    <Content Include="App_Data\FolderDb\Persons\8.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\FolderDBb\21.xml">
+    <Content Include="App_Data\FolderDb\Persons\9.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\FolderDBb\22.xml">
+    <Content Include="App_Data\FolderDb\Phones\0.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\FolderDBb\23.xml">
+    <Content Include="App_Data\FolderDb\Phones\1.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\FolderDBb\file.txt">
+    <Content Include="App_Data\FolderDb\Phones\2.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\FolderDb\Phones\3.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\FolderDb\Phones\4.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\FolderDb\Phones\5.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\FolderDb\Phones\6.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\FolderDb\Phones\7.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\FolderDb\Phones\8.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\FolderDb\Phones\9.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Data\ServiceDatabase.mdf">
@@ -102,6 +127,7 @@
       <DependentUpon>ServiceDatabase.mdf</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="db_script.sql" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Data\MemoryPersonDB.cs" />

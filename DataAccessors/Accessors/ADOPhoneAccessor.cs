@@ -3,15 +3,21 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Common;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace DataAccessors.Accessors
 {
-    public class ADOPersonAccessor: IAccessor<Person>
+    public class ADOPhoneAccessor: IAccessor<Phone>
     {
         private DbProviderFactory factory;
-        private string connectionString;    
+        private string connectionString;
 
-        public ADOPersonAccessor(string appConfigConnectionString)
+        private static string PhoneDbFields = "id, number, person_id";
+        private static string TblName = "PhoneTbl";
+
+        public ADOPhoneAccessor(string appConfigConnectionString)
         {
             connectionString = ConfigurationManager.ConnectionStrings[appConfigConnectionString].ConnectionString;
             string providerName = ConfigurationManager.ConnectionStrings[appConfigConnectionString].ProviderName;
@@ -19,7 +25,7 @@ namespace DataAccessors.Accessors
         }
 
 
-        public ICollection<Person> GetAll()
+        public ICollection<Phone> GetAll()
         {
             DbConnection conn = factory.CreateConnection();
             conn.ConnectionString = connectionString;
@@ -27,19 +33,28 @@ namespace DataAccessors.Accessors
             using (conn)
             {
                 DbCommand comm = conn.CreateCommand();
-                comm.CommandText = "SELECT id, name, lastname, dob from PersonTbl";
+                comm.CommandText = "SELECT " + PhoneDbFields + " FROM " + TblName;
                 DbDataReader reader = comm.ExecuteReader();
-                List<Person> result = new List<Person>();
+                List<Phone> result = new List<Phone>();
                 while (reader.Read())
                 {
-                    Person p = ProcessDataReader(reader);
-                    result.Add(p);
+                    int id = reader.GetInt32(0);
+                    string number = string.Empty;
+                    int person_id = -1;
+
+                    if(!reader.IsDBNull(1))
+                        number = reader.GetString(1);
+
+                    if(!reader.IsDBNull(2))
+                        person_id = reader.GetInt32(2);
+
+                    result.Add(new Phone { Id = id, Number = number, PersonId = person_id });
                 }
                 return result;
             }            
         }
 
-        public Person GetById(object id)
+        public Phone GetById(object id)
         {
             DbConnection conn = factory.CreateConnection();
             conn.ConnectionString = connectionString;
@@ -48,8 +63,8 @@ namespace DataAccessors.Accessors
             {
                 DbCommand comm = conn.CreateCommand();
                 comm.CommandText = 
-                    "SELECT id, name, lastname"+
-                    " FROM PersonTbl WHERE id=@id";
+                    "SELECT " + PhoneDbFields +
+                    " FROM " + TblName + " WHERE id=@id";
                 DbParameter param = comm.CreateParameter();
                 param.DbType = System.Data.DbType.Int32; 
                 param.ParameterName="@id";
@@ -59,7 +74,17 @@ namespace DataAccessors.Accessors
                 DbDataReader reader = comm.ExecuteReader();
                 while (reader.Read())
                 {
-                    return ProcessDataReader(reader);
+                    int _id = reader.GetInt32(0);
+                    string number = string.Empty;
+                    int person_id = -1;
+
+                    if (!reader.IsDBNull(1))
+                        number = reader.GetString(1);
+
+                    if (!reader.IsDBNull(2))
+                        person_id = reader.GetInt32(2);
+
+                    return new Phone { Id = _id, Number = number, PersonId = person_id };
                 }
             }
             return null;
@@ -74,7 +99,7 @@ namespace DataAccessors.Accessors
             {
                 DbCommand comm = conn.CreateCommand();
                 comm.CommandText =
-                    "DELETE FROM PersonTbl WHERE id=@id";
+                    "DELETE FROM " + TblName + " WHERE id=@id";
                 DbParameter param = comm.CreateParameter();
                 param.DbType = System.Data.DbType.Int32;
                 param.ParameterName = "@id";
@@ -84,7 +109,7 @@ namespace DataAccessors.Accessors
             }
         }
 
-        public void Insert(Person p)
+        public void Insert(Phone p)
         {
             DbConnection conn = factory.CreateConnection();
             conn.ConnectionString = connectionString;
@@ -92,9 +117,8 @@ namespace DataAccessors.Accessors
             using (conn)
             {
                 DbCommand comm = conn.CreateCommand();
-                comm.CommandText =
-                    "INSERT INTO PersonTbl(id, name, lastname, dob)"+
-                    " VALUES(@id, @name, @lastName, @dob)";
+                comm.CommandText = 
+                    String.Format("INSERT INTO {0}({1}) VALUES(@id, @number, @personid)", TblName, PhoneDbFields);
                 DbParameter param = comm.CreateParameter();
                 param.DbType = System.Data.DbType.Int32;
                 param.ParameterName = "@id";
@@ -103,43 +127,18 @@ namespace DataAccessors.Accessors
 
                 param = comm.CreateParameter();
                 param.DbType = System.Data.DbType.String;
-                param.ParameterName = "@name";
-                param.Value = p.Name;
+                param.ParameterName = "@number";
+                param.Value = p.Number;
                 comm.Parameters.Add(param);
 
                 param = comm.CreateParameter();
-                param.DbType = System.Data.DbType.String;
-                param.ParameterName = "@lastName";
-                param.Value = p.LastName;
-                comm.Parameters.Add(param);
-
-                param = comm.CreateParameter();
-                param.DbType = System.Data.DbType.Date;
-                param.ParameterName = "@dob";
-                param.Value = p.DayOfBirth;
+                param.DbType = System.Data.DbType.Int32;
+                param.ParameterName = "@personid";
+                param.Value = p.PersonId;
                 comm.Parameters.Add(param);
 
                 comm.ExecuteNonQuery();
             }
-        }
-
-        private Person ProcessDataReader(DbDataReader reader)
-        {
-            int id = reader.GetInt32(0);
-            string name = string.Empty;
-            string lastName = string.Empty;
-            DateTime dob = new DateTime();
-
-            if (!reader.IsDBNull(1))
-                name = reader.GetString(1);
-
-            if (!reader.IsDBNull(2))
-                lastName = reader.GetString(2);
-
-            if (!reader.IsDBNull(3))
-                dob = reader.GetDateTime(3);
-
-            return new Person { Id = id, Name = name.Trim(), LastName = lastName.Trim(), DayOfBirth = dob };
         }
     }
 }

@@ -22,7 +22,7 @@ namespace DataAccessors.Accessors
             {
                 tmp.AddFirst(new Person
                 {
-                    ID = i,
+                    Id = i,
                     LastName = String.Format("{0} lastname", i.ToString()),
                     Name = String.Format("{0} name", i.ToString()),
                     DayOfBirth = DateTime.Today
@@ -37,12 +37,12 @@ namespace DataAccessors.Accessors
         }
         public Person GetById(object id)
         {
-            var res = from p in data where p.ID == (int)id select p;
+            var res = from p in data where p.Id == (int)id select p;
             return res.FirstOrDefault<Person>();
         }
         public void DeleteById(object id)
         {
-            var res = from p in data where p.ID == (int)id select p;
+            var res = from p in data where p.Id == (int)id select p;
             Person exPerson = res.FirstOrDefault<Person>();
             if (exPerson != null)
             {
@@ -51,7 +51,7 @@ namespace DataAccessors.Accessors
         }
         public void Insert(Person p)
         {
-            var tmp = from ep in data where ep.ID == p.ID select ep;
+            var tmp = from ep in data where ep.Id == p.Id select ep;
             Person existPerson = tmp.FirstOrDefault<Person>();
             if (existPerson != null)
             {

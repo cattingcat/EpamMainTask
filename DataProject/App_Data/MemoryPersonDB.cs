@@ -7,23 +7,36 @@ using System.Threading.Tasks;
 
 namespace DataAccessors.Data
 {
-    public static class MemoryPersonDB
+    public static class MemoryDb
     {
-        public static ICollection<Person> Data;
+        public static ICollection<Person> PersonData;
+        public static ICollection<Phone> PhoneData;
 
-        static MemoryPersonDB()
+        static MemoryDb()
         {
-            LinkedList<Person> tmp = new LinkedList<Person>();
+            LinkedList<Person> persons = new LinkedList<Person>();
             Random rand = new Random();
             for (int i = 0; i < 10; ++i)
             {
-                tmp.AddFirst(new Person { 
-                    ID = i, 
+                persons.AddFirst(new Person { 
+                    Id = i, 
                     LastName = String.Format("{0} lastname", i.ToString()), 
                     Name = String.Format("{0} name", i.ToString()), 
                     DayOfBirth = DateTime.Today });
             }
-            Data = tmp;
+            PersonData = persons;
+
+            LinkedList<Phone> phones = new LinkedList<Phone>();
+            for (int i = 0; i < 10; ++i)
+            {
+                phones.AddFirst(new Phone
+                {
+                    Id = i,
+                    Number = Guid.NewGuid().ToString(),
+                    PersonId = i
+                });
+            }
+            PhoneData = phones;
         }
     }
 }

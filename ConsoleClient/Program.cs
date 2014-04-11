@@ -42,41 +42,110 @@ directory accessor - 3
 file accessor      - 4
 memory accessor    - 5");
 
-            IAccessor<Person> accessor = null;
+            IAccessor<Person> personAcc = null;
+            IAccessor<Phone> phoneAcc = null;
             int resp = int.Parse(Console.ReadLine());
 
-            string appConfigConnectionString = "CompactDB";
+            string appConfigConnectionString = "ServiceDb";
             switch (resp)
             {
                 case 1:
-                    accessor = new OrmPersonAccessor(appConfigConnectionString);
+                    personAcc = new OrmPersonAccessor(appConfigConnectionString);
+                    phoneAcc = new OrmPhoneAccessor(appConfigConnectionString);
                     break;
                 case 2:
-                    accessor = new ADOPersonAccessor(appConfigConnectionString);
+                    personAcc = new ADOPersonAccessor(appConfigConnectionString);
+                    phoneAcc = new ADOPhoneAccessor(appConfigConnectionString);
                     break;
                 case 3:
-                    accessor = new DirectoryPersonAccessor(@"App_Data\FolderDBb");
+                    personAcc = new DirectoryPersonAccessor(@"App_Data\FolderDb\Persons");
+                    phoneAcc = new DirectoryPhoneAccessor(@"App_Data\FolderDb\Phone");
                     break;
                 case 4:
-                    accessor = new FilePersonAccessor(@"App_Data\FilePersonDB.txt");
+                    personAcc = new FilePersonAccessor(@"App_Data\FileDbs\FilePersonDb.xml");
+                    phoneAcc = new FilePhoneAccessor(@"App_Data\FileDbs\FilePhoneDb.xml");
                     break;
                 case 5:
-                    accessor = new MemoryPersonAccessor();
+                    personAcc = new MemoryPersonAccessor();
+                    //phoneAcc = new MemoryPhoneAccessor();
                     break;
-            }               
-            RunPersonCUI(accessor);
+            }
+            while (true)
+            {
+                Console.WriteLine(
+@"Select entity type:
+Person - 1
+Phone  - 2
+exit   - 0");
+                int t;
+                bool b = int.TryParse(Console.ReadLine(), out t);
+                if (b)
+                {
+                    if (t == 1)
+                        RunCUI<Person>(personAcc);
+                    else if (t == 2)
+                        RunCUI<Phone>(phoneAcc);
+                    else
+                        return;
+                }
+                else
+                    return;
+            }
         }
 
-        private static void RunPersonCUI(IAccessor<Person> accessor)
+        private static ICollection<string> GetFields<T>()
         {
+            if (typeof(T) == typeof(Person))
+            {
+                return new[] { "id", "name", "lastname" };
+            }
+            else
+            {
+                return new[] { "id", "number", "personid" };
+            }
+        }
+        private static object FromStringArray<T>(string[] arr)
+        {
+
+            if (typeof(T) == typeof(Person))
+            {
+                int id = Int32.Parse(arr[1]);
+                Person p = new Person() { Id = id };
+                if (arr.Length >= 4)
+                {
+                    p.Name = arr[2];
+                    p.LastName = arr[3];
+                }
+            }
+            else
+            {
+                int id = Int32.Parse(arr[1]);
+                Phone p = new Phone() { Id = id };
+                if (arr.Length >= 4)
+                {
+                    p.Number = arr[2];
+                    p.PersonId = int.Parse(arr[3]);
+                }
+                return p;
+            }
+            return null;            
+        }
+        private static void RunCUI<T>(IAccessor<T> accessor)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var s in GetFields<T>())
+            {
+                sb.AppendFormat("[{0}] ", s);
+            }
+            
             Console.WriteLine(
 @"Commands:
 p                         - print all
 p [id]                    - print one
 i [id]                    - insert
-i [id] [name] [last name] - insert
-d [id]                    - delete");    
-         
+i " + sb.ToString() +  @" - insert
+d [id]                    - delete");
+
             Console.WriteLine("Now using: {0} ", accessor.GetType().Name);
             while (true)
             {
@@ -86,7 +155,7 @@ d [id]                    - delete");
                     var s = new SimpleTimer();
                     if (command.Length == 1)
                     {
-                        foreach (Person p in accessor.GetAll())
+                        foreach (object p in accessor.GetAll())
                         {
                             Console.WriteLine(p);
                         }
@@ -94,7 +163,7 @@ d [id]                    - delete");
                     else if (command.Length == 2)
                     {
                         int id = Int32.Parse(command[1]);
-                        Person p = accessor.GetById(id);
+                        object p = accessor.GetById(id);
                         Console.WriteLine(p.ToString());
                     }
                     s.Dispose();
@@ -109,14 +178,8 @@ d [id]                    - delete");
                 else if (command[0] == "i")
                 {
                     var s = new SimpleTimer();
-                    int id = Int32.Parse(command[1]);
-                    Person p = new Person() { ID = id };
-                    if (command.Length >= 4)
-                    {
-                        p.Name = command[2];
-                        p.LastName = command[3];
-                    }
-                    accessor.Insert(p);
+                    object o = FromStringArray<T>(command);
+                    accessor.Insert((T)o);
                     s.Dispose();
                 }
                 else if (String.IsNullOrEmpty(command[0]))

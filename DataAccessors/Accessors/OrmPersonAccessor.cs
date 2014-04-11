@@ -20,15 +20,9 @@ namespace DataAccessors.Accessors
             string connectionString = ConfigurationManager.ConnectionStrings[appConfigConnectionString].ConnectionString;
             string providerName = ConfigurationManager.ConnectionStrings[appConfigConnectionString].ProviderName;
             DbProviderFactory factory = DbProviderFactories.GetFactory(providerName);
-            orm = new MyORM(factory, connectionString, typeof(Person));
-            orm.RelationsEnabled = false;
+            orm = new MyORM(factory, connectionString, typeof(Person), typeof(Phone));
+            orm.RelationsEnabled = true;
         }
-
-        // clients not depend from ORM-class lib
-        /*public OrmPersonAccessor(MyORM ormInstance)
-        {
-            orm = ormInstance;
-        }*/
 
         public ICollection<Person> GetAll()
         {            

@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CC4318D2-979F-4EF0-9125-283C7366D246}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{C3CED0DC-1D96-4233-B673-3BED49428F7D}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DataAccessors</RootNamespace>
-    <AssemblyName>DataAccessors</AssemblyName>
+    <RootNamespace>DataInitializer</RootNamespace>
+    <AssemblyName>DataInitializer</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -31,9 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,24 +41,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Accessors\ADOPersonAccessor.cs" />
-    <Compile Include="Accessors\ADOPhoneAccessor.cs" />
-    <Compile Include="Accessors\DirectoryPersonAccessor.cs" />
-    <Compile Include="Accessors\DirectoryPhoneAccessor.cs" />
-    <Compile Include="Accessors\FilePersonAccessor.cs" />
-    <Compile Include="Accessors\FilePhoneAccessor.cs" />
-    <Compile Include="Accessors\IAccessor.cs" />
-    <Compile Include="Accessors\MemoryPersonAccessor.cs" />
-    <Compile Include="Accessors\OrmPersonAccessor.cs" />
-    <Compile Include="Accessors\OrmPhoneAccessor.cs" />
-    <Compile Include="Entity\Person.cs" />
-    <Compile Include="Entity\Phone.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MyOrm\MyOrm.csproj">
-      <Project>{f2c2bcab-1a58-409f-8e51-f1417d624a8b}</Project>
-      <Name>MyOrm</Name>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccessors\DataAccessors.csproj">
+      <Project>{cc4318d2-979f-4ef0-9125-283c7366d246}</Project>
+      <Name>DataAccessors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataProject\DataProject.csproj">
+      <Project>{0c85e7b9-7397-494c-8b5d-a1ac893b2dd5}</Project>
+      <Name>DataProject</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -27,7 +27,7 @@ namespace WinFormsClient
             string lastName = lastNameTextBox.Text.Trim();
             DateTime dt = dateTimePicker.Value;
 
-            Person p = new Person { ID = id, Name = name, LastName = lastName, DayOfBirth = dt };
+            Person p = new Person { Id = id, Name = name, LastName = lastName, DayOfBirth = dt };
             Result = p;
 
             DialogResult = System.Windows.Forms.DialogResult.OK;

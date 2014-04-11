@@ -1,42 +1,46 @@
 ﻿using DataAccessors.Entity;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace DataAccessors.Accessors
 {
-    public class DirectoryPersonAccessor: IAccessor<Person>
+    public class DirectoryPhoneAccessor: IAccessor<Phone>
     {
-        private static XmlSerializer serializer = new XmlSerializer(typeof(Person));
+        private static XmlSerializer serializer = new XmlSerializer(typeof(Phone));
 
         private string directoryName;
 
-        public DirectoryPersonAccessor(string path)
+        public DirectoryPhoneAccessor(string path)
         {
             directoryName = path;
         }
 
-        public ICollection<Person> GetAll()
+        public ICollection<Phone> GetAll()
         {
-            ICollection<Person> res = new List<Person>();
+            ICollection<Phone> res = new List<Phone>();
             foreach (string filename in Directory.EnumerateFiles(directoryName, "*.xml"))
             {
                 using (FileStream fs = File.Open(filename, FileMode.Open))
                 {
-                    Person p = (Person)serializer.Deserialize(fs);
+                    Phone p = (Phone)serializer.Deserialize(fs);
                     res.Add(p);
                 }
             }
             return res;
         }
-        public Person GetById(object id)
+        public Phone GetById(object id)
         {
             string path = GetFileName((int)id);
             if (File.Exists(path))
             {
                 using (FileStream fs = new FileStream(path, FileMode.Open))
                 {
-                    return (Person)serializer.Deserialize(fs);
+                    return (Phone)serializer.Deserialize(fs);
                 }
             }
             else
@@ -49,19 +53,19 @@ namespace DataAccessors.Accessors
             string path = GetFileName((int)id);
             File.Delete(path);
         }
-        public void Insert(Person p)
+        public void Insert(Phone p)
         {
             CreateOrReplace(p);
-        }       
+        }
 
-        private void SerializeCollection(ICollection<Person> collection)
+        private void SerializeCollection(ICollection<Phone> collection)
         {
-            foreach (Person p in collection)
+            foreach (Phone p in collection)
             {
                 CreateOrIgnore(p);
             }
         }
-        private void CreateOrReplace(Person p)
+        private void CreateOrReplace(Phone p)
         {
             string path = GetFileName(p.Id);
             if (File.Exists(path))
@@ -79,7 +83,7 @@ namespace DataAccessors.Accessors
                 }
             }
         }
-        private void CreateOrIgnore(Person p)
+        private void CreateOrIgnore(Phone p)
         {
             string path = GetFileName(p.Id);
             if (File.Exists(path))

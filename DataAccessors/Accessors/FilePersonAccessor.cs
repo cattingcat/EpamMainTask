@@ -21,7 +21,14 @@ namespace DataAccessors.Accessors
         public FilePersonAccessor(string fileName)
         {
             this.fileName = fileName;
-            data = DeserializeCollection();
+            try
+            {
+                data = DeserializeCollection();
+            }
+            catch
+            {
+                data = new LinkedList<Person>();
+            }
         }
 
         public ICollection<Person> GetAll()
@@ -30,12 +37,12 @@ namespace DataAccessors.Accessors
         }
         public Person GetById(object id)
         {
-            var res = from p in data where p.ID == (int)id select p;
+            var res = from p in data where p.Id == (int)id select p;
             return res.FirstOrDefault<Person>();
         }
         public void DeleteById(object id)
         {
-            var res = from p in data where p.ID == (int)id select p;
+            var res = from p in data where p.Id == (int)id select p;
             if (res.FirstOrDefault<Person>() != null)
             {
                 Person existPerson = res.First<Person>();
@@ -45,7 +52,7 @@ namespace DataAccessors.Accessors
         }
         public void Insert(Person p)
         {
-            var tmp = from ep in data where ep.ID == p.ID select ep;
+            var tmp = from ep in data where ep.Id == p.Id select ep;
             Person existPerson = tmp.FirstOrDefault<Person>();
             if (existPerson != null)
             {
@@ -65,7 +72,7 @@ namespace DataAccessors.Accessors
         public ICollection<Person> DeserializeCollection()
         {
             using (StreamReader sr = new StreamReader(fileName))
-            {
+            {               
                 return (List<Person>)PersonArraySerializer.Deserialize(sr);
             }
         }
