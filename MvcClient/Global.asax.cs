@@ -28,6 +28,10 @@ namespace MvcClient
             string fileDbHome = ConfigurationManager.AppSettings.Get("FileDbHome");
             string directoryDbHome = ConfigurationManager.AppSettings.Get("DirectoryDbHome");
 
+            string appDataFolder = AppDomain.CurrentDomain.GetData("DataDirectory") as string;
+            fileDbHome = fileDbHome.Replace("|DataDirectory|", appDataFolder);
+            directoryDbHome = directoryDbHome.Replace("|DataDirectory|", appDataFolder);
+
             switch (accessorType)
             {
                 case "orm":
@@ -44,7 +48,7 @@ namespace MvcClient
                     break;
                 case "file":
                     PersonAccessor = new FilePersonAccessor(fileDbHome + @"\FilePersonDb.xml");
-                    PhoneAccessor = new FilePhoneAccessor(fileDbHome + @"/App_Data\FileDbs\FilePhoneDb.xml");
+                    PhoneAccessor = new FilePhoneAccessor(fileDbHome + @"\FilePhoneDb.xml");
                     break;
                 case "mem":
                     PersonAccessor = new MemoryPersonAccessor();
