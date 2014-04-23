@@ -16,8 +16,10 @@ namespace MvcClient
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Person", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapPageRoute("wform", "WebForm", "~/Views/WebForm.aspx");
+            
         }
     }
 }

@@ -980,3 +980,178 @@ The statement has been terminated.
 04/17/2014 12:35:08|Trace|App auth request!
 04/17/2014 12:35:09|Trace|App_begin request start!
 04/17/2014 12:35:09|Trace|App auth request!
+04/17/2014 14:21:48|Trace|App start!
+04/17/2014 14:21:49|Trace|App_begin request start!
+04/17/2014 14:21:49|Trace|App auth request!
+04/17/2014 14:21:51|Trace|Session start!
+04/17/2014 14:22:34|Trace|App_begin request start!
+04/17/2014 14:22:34|Trace|App auth request!
+04/17/2014 14:22:34|Trace|Session start!
+04/17/2014 14:30:03|Trace|App start!
+04/17/2014 14:30:04|Trace|App_begin request start!
+04/17/2014 14:30:04|Trace|App auth request!
+04/17/2014 14:30:04|Trace|Session start!
+04/17/2014 14:30:14|Trace|App_begin request start!
+04/17/2014 14:30:14|Trace|App auth request!
+04/17/2014 14:30:16|Trace|App_begin request start!
+04/17/2014 14:30:16|Trace|App auth request!
+04/17/2014 14:30:17|Trace|App_begin request start!
+04/17/2014 14:30:17|Trace|App auth request!
+04/17/2014 14:30:20|Trace|App_begin request start!
+04/17/2014 14:30:20|Trace|App auth request!
+04/17/2014 14:30:21|Trace|App_begin request start!
+04/17/2014 14:30:21|Trace|App auth request!
+04/17/2014 14:30:23|Trace|App_begin request start!
+04/17/2014 14:30:23|Trace|App auth request!
+04/17/2014 14:30:23|Trace|App_begin request start!
+04/17/2014 14:30:23|Trace|App auth request!
+04/17/2014 14:30:24|Trace|App_begin request start!
+04/17/2014 14:30:24|Trace|App auth request!
+04/17/2014 14:30:25|Trace|App_begin request start!
+04/17/2014 14:30:25|Trace|App auth request!
+04/17/2014 14:30:26|Trace|App_begin request start!
+04/17/2014 14:30:26|Trace|App auth request!
+04/17/2014 14:30:26|Trace|App_begin request start!
+04/17/2014 14:30:26|Trace|App auth request!
+04/17/2014 14:30:26|Trace|App_begin request start!
+04/17/2014 14:30:26|Trace|App auth request!
+04/17/2014 14:30:27|Trace|App_begin request start!
+04/17/2014 14:30:27|Trace|App auth request!
+04/17/2014 14:30:27|Trace|App_begin request start!
+04/17/2014 14:30:27|Trace|App auth request!
+04/17/2014 14:30:28|Trace|App_begin request start!
+04/17/2014 14:30:28|Trace|App auth request!
+04/17/2014 14:30:28|Trace|App_begin request start!
+04/17/2014 14:30:28|Trace|App auth request!
+04/17/2014 14:30:29|Trace|App_begin request start!
+04/17/2014 14:30:29|Trace|App auth request!
+04/17/2014 14:31:05|Trace|App start!
+04/17/2014 14:31:05|Trace|App_begin request start!
+04/17/2014 14:31:05|Trace|App auth request!
+04/17/2014 14:31:06|Trace|Session start!
+04/17/2014 14:31:07|Trace|App_begin request start!
+04/17/2014 14:31:07|Trace|App auth request!
+04/17/2014 14:31:08|Trace|App_begin request start!
+04/17/2014 14:31:08|Trace|App auth request!
+04/17/2014 14:31:09|Trace|App_begin request start!
+04/17/2014 14:31:09|Trace|App auth request!
+04/17/2014 14:31:11|Trace|App_begin request start!
+04/17/2014 14:31:11|Trace|App auth request!
+04/17/2014 14:31:12|Trace|App_begin request start!
+04/17/2014 14:31:12|Trace|App auth request!
+04/17/2014 14:31:14|Trace|App_begin request start!
+04/17/2014 14:31:14|Trace|App auth request!
+04/17/2014 14:31:15|Trace|App_begin request start!
+04/17/2014 14:31:15|Trace|App auth request!
+04/17/2014 14:31:16|Trace|App_begin request start!
+04/17/2014 14:31:16|Trace|App auth request!
+04/17/2014 14:31:17|Trace|App_begin request start!
+04/17/2014 14:31:17|Trace|App auth request!
+04/17/2014 14:31:19|Trace|App_begin request start!
+04/17/2014 14:31:19|Trace|App auth request!
+04/17/2014 14:31:20|Trace|App_begin request start!
+04/17/2014 14:31:20|Trace|App auth request!
+04/17/2014 14:31:21|Trace|App_begin request start!
+04/17/2014 14:31:21|Trace|App auth request!
+04/17/2014 14:31:22|Trace|App_begin request start!
+04/17/2014 14:31:22|Trace|App auth request!
+04/17/2014 14:32:00|Trace|App start!
+04/17/2014 14:32:00|Trace|App_begin request start!
+04/17/2014 14:32:00|Trace|App auth request!
+04/17/2014 14:32:01|Trace|Session start!
+04/17/2014 14:32:02|Trace|App_begin request start!
+04/17/2014 14:32:02|Trace|App auth request!
+04/17/2014 14:32:03|Trace|App_begin request start!
+04/17/2014 14:32:03|Trace|App auth request!
+04/17/2014 14:32:04|Trace|App_begin request start!
+04/17/2014 14:32:04|Trace|App auth request!
+04/17/2014 14:32:05|Trace|App_begin request start!
+04/17/2014 14:32:05|Trace|App auth request!
+04/17/2014 14:32:06|Trace|App_begin request start!
+04/17/2014 14:32:06|Trace|App auth request!
+04/17/2014 14:32:06|Trace|App_begin request start!
+04/17/2014 14:32:06|Trace|App auth request!
+04/17/2014 14:32:07|Trace|App_begin request start!
+04/17/2014 14:32:07|Trace|App auth request!
+04/17/2014 14:32:07|Trace|App_begin request start!
+04/17/2014 14:32:07|Trace|App auth request!
+04/17/2014 14:32:08|Trace|App_begin request start!
+04/17/2014 14:32:08|Trace|App auth request!
+04/17/2014 14:32:09|Trace|App_begin request start!
+04/17/2014 14:32:09|Trace|App auth request!
+04/17/2014 14:32:09|Trace|App_begin request start!
+04/17/2014 14:32:09|Trace|App auth request!
+04/17/2014 14:32:10|Trace|App_begin request start!
+04/17/2014 14:32:10|Trace|App auth request!
+04/17/2014 14:32:10|Trace|App_begin request start!
+04/17/2014 14:32:10|Trace|App auth request!
+04/17/2014 14:32:11|Trace|App_begin request start!
+04/17/2014 14:32:11|Trace|App auth request!
+04/17/2014 14:32:11|Trace|App_begin request start!
+04/17/2014 14:32:11|Trace|App auth request!
+04/17/2014 14:32:12|Trace|App_begin request start!
+04/17/2014 14:32:12|Trace|App auth request!
+04/17/2014 14:32:12|Trace|App_begin request start!
+04/17/2014 14:32:12|Trace|App auth request!
+04/17/2014 14:32:13|Trace|App_begin request start!
+04/17/2014 14:32:13|Trace|App auth request!
+04/23/2014 13:32:07|Trace|App start!
+04/23/2014 13:32:08|Trace|App_begin request start!
+04/23/2014 13:32:08|Trace|App auth request!
+04/23/2014 13:32:11|Trace|Session start!
+04/23/2014 13:32:12|Trace|PersonList init
+04/23/2014 13:32:12|Trace|PersonList load
+04/23/2014 13:32:12|Trace|PersonList pre-render
+04/23/2014 13:32:23|Trace|App_begin request start!
+04/23/2014 13:32:23|Trace|App auth request!
+04/23/2014 13:32:25|Trace|App_begin request start!
+04/23/2014 13:32:25|Trace|App auth request!
+04/23/2014 13:32:25|Trace|phone page load
+04/23/2014 13:32:25|Trace|phone page rpe render
+04/23/2014 13:32:27|Trace|App_begin request start!
+04/23/2014 13:32:27|Trace|App auth request!
+04/23/2014 13:33:01|Trace|App start!
+04/23/2014 13:33:01|Trace|App_begin request start!
+04/23/2014 13:33:01|Trace|App auth request!
+04/23/2014 13:33:01|Trace|Session start!
+04/23/2014 13:35:29|Trace|App start!
+04/23/2014 13:35:29|Trace|App_begin request start!
+04/23/2014 13:35:29|Trace|App auth request!
+04/23/2014 13:35:30|Trace|Session start!
+04/23/2014 13:35:31|Trace|App_begin request start!
+04/23/2014 13:35:31|Trace|App auth request!
+04/23/2014 13:35:33|Trace|App_begin request start!
+04/23/2014 13:35:33|Trace|App auth request!
+04/23/2014 13:35:33|Trace|PersonList init
+04/23/2014 13:35:33|Trace|PersonList load
+04/23/2014 13:35:33|Trace|PersonList pre-render
+04/23/2014 13:35:35|Trace|App_begin request start!
+04/23/2014 13:35:35|Trace|App auth request!
+04/23/2014 13:40:16|Trace|App start!
+04/23/2014 13:40:16|Trace|App_begin request start!
+04/23/2014 13:40:16|Trace|App auth request!
+04/23/2014 13:40:18|Trace|App error!
+04/23/2014 13:51:02|Trace|App start!
+04/23/2014 13:52:59|Trace|App start!
+04/23/2014 13:52:59|Trace|App_begin request start!
+04/23/2014 13:52:59|Trace|App auth request!
+04/23/2014 13:53:01|Trace|App error!
+04/23/2014 13:54:38|Trace|App start!
+04/23/2014 13:54:38|Trace|App_begin request start!
+04/23/2014 13:54:38|Trace|App auth request!
+04/23/2014 14:54:48|Trace|App start!
+04/23/2014 14:54:48|Trace|App_begin request start!
+04/23/2014 14:54:48|Trace|App auth request!
+04/23/2014 14:54:50|Trace|Session start!
+04/23/2014 14:54:50|Trace|PersonList init
+04/23/2014 14:54:50|Trace|PersonList load
+04/23/2014 14:54:50|Trace|PersonList pre-render
+04/23/2014 14:54:54|Trace|App_begin request start!
+04/23/2014 14:54:54|Trace|App auth request!
+04/23/2014 14:54:57|Trace|App_begin request start!
+04/23/2014 14:54:57|Trace|App auth request!
+04/23/2014 14:54:57|Trace|PersonList init
+04/23/2014 14:54:57|Trace|PersonList load
+04/23/2014 14:54:57|Trace|PersonList pre-render
+04/23/2014 14:54:59|Trace|App_begin request start!
+04/23/2014 14:54:59|Trace|App auth request!
