@@ -1,20 +1,24 @@
-﻿using DataAccessors.Accessors;
-using DataAccessors.Entity;
-using Ninject;
-using Ninject.Modules;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Configuration;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+
+using Ninject;
+using Ninject.Modules;
+using NLog;
+
+using DataAccessors.Accessors;
+using DataAccessors.Entity;
+
 
 namespace MvcClient
 {
     public class NinjectControllerFactory : DefaultControllerFactory
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         IKernel _ninjectKernel;
+        
 
         public NinjectControllerFactory()
         {
@@ -61,6 +65,8 @@ namespace MvcClient
                     case "mem":
                         break;
                 }
+
+                logger.Trace("Ninject module load, current accessor: {0}", accessorType);
             }
         }
     }

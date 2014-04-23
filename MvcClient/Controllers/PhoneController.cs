@@ -1,5 +1,6 @@
 ﻿using DataAccessors.Accessors;
 using DataAccessors.Entity;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -10,12 +11,16 @@ using System.Web.Mvc;
 namespace MvcClient.Controllers
 {
     public class PhoneController : Controller
-    {        
+    {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         private IAccessor<Person> _personAccessor;
         private IAccessor<Phone> _phoneAccessor;
 
         public PhoneController(IAccessor<Phone> phoneAccessor, IAccessor<Person> personAccessor)
         {
+            logger.Trace("Phone controller created");
+
             _personAccessor = personAccessor;
             _phoneAccessor = phoneAccessor;
         }
@@ -23,6 +28,8 @@ namespace MvcClient.Controllers
         // GET: /Phone/
         public ActionResult Index()
         {
+            logger.Trace("Phone controller /Index");
+
             return View(_phoneAccessor.GetAll());
         }
         
@@ -30,6 +37,8 @@ namespace MvcClient.Controllers
         // Redirect to owner-person details
         public ActionResult Details(int id)
         {
+            logger.Trace("Phone controller /Details/{0}", id);
+
             Phone phone = _phoneAccessor.GetAll().SingleOrDefault(p => p.Id == id);   
             var dict = new System.Web.Routing.RouteValueDictionary();
             dict.Add("id", phone.PersonId);
@@ -39,6 +48,8 @@ namespace MvcClient.Controllers
         // GET: /Phone/Create
         public ActionResult Create()
         {
+            logger.Trace("Phone controller /Create");
+
             ViewBag.Persons = _personAccessor.GetAll();
             return View();
         }
@@ -47,6 +58,8 @@ namespace MvcClient.Controllers
         [HttpPost]
         public ActionResult Create(Phone phone)
         {
+            logger.Trace("Phone controller /Create POST {0}", phone.Id);
+
             _phoneAccessor.Insert(phone);
             return RedirectToAction("Index");
         }
@@ -55,6 +68,8 @@ namespace MvcClient.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
+            logger.Trace("Phone controller /Delete/{0}", id);
+
             try
             {
                 _phoneAccessor.DeleteById(id);

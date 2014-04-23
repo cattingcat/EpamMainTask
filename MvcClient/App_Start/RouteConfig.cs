@@ -18,8 +18,6 @@ namespace MvcClient
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Person", action = "Index", id = UrlParameter.Optional }
             );
-            routes.MapPageRoute("wform", "WebForm", "~/Views/WebForm.aspx");
-            
         }
     }
 }
