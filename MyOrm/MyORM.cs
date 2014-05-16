@@ -42,11 +42,11 @@ namespace MyOrm
             }
         }
 
-        public ICollection<T> SelectAll<T>() where T : class, new()
+        public IEnumerable<T> SelectAll<T>() where T : class, new()
         {
             OrmMap map = _mappingPool[typeof(T)];
             string selectQuery = map.BuildSelectAllQuery();
-            ICollection<T> result = null;
+            IEnumerable<T> result = null;
             using (DbConnection connection = GetOpenConnection())
             {
                 DbCommand command = connection.CreateCommand();
@@ -218,7 +218,7 @@ namespace MyOrm
                     param.Value = containerId;
                     command.Parameters.Add(param);
 
-                    ICollection<object> innerCollection = null;
+                    IEnumerable<object> innerCollection = null;
                     using (DbDataReader reader = command.ExecuteReader())
                     {
                         DbReaderAdapter adapter = new DbReaderAdapter(reader, innerMap);

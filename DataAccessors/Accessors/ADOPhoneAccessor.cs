@@ -23,7 +23,7 @@ namespace DataAccessors.Accessors
         }
 
 
-        public ICollection<Phone> GetAll()
+        public IEnumerable<Phone> GetAll()
         {
             DbConnection conn = _factory.CreateConnection();
             conn.ConnectionString = _connectionString;

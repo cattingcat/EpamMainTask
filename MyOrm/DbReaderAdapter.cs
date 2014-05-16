@@ -40,7 +40,7 @@ namespace MyOrm
             return null;
         }
 
-        public ICollection<T> GetMultipleResult<T>() where T : class, new()
+        public IEnumerable<T> GetMultipleResult<T>() where T : class, new()
         {
             List<T> result = new List<T>();
             while (_reader.Read())
@@ -89,7 +89,7 @@ namespace MyOrm
             return null;
         }
 
-        public ICollection<object> GetMultipleResult()
+        public IEnumerable<object> GetMultipleResult()
         {
             List<object> result = new List<object>();
             while (_reader.Read())

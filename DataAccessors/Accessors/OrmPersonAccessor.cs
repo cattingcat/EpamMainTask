@@ -23,7 +23,7 @@ namespace DataAccessors.Accessors
         }
 
 
-        public ICollection<Person> GetAll()
+        public IEnumerable<Person> GetAll()
         {
             return _orm.SelectAll<Person>();
         }

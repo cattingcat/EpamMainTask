@@ -5,7 +5,7 @@ namespace DataAccessors.Accessors
 {
     public interface IAccessor<T>
     {
-        ICollection<T> GetAll();
+        IEnumerable<T> GetAll();
 
         T GetById(object id);
 

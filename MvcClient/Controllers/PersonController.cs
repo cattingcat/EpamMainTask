@@ -29,7 +29,7 @@ namespace MvcClient.Controllers
 
         // GET: /Person/
         public ActionResult Index()
-        {
+        {            
             logger.Trace("Person controller /Index");
 
             return View(_personAccessor.GetAll());

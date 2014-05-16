@@ -20,7 +20,7 @@ namespace DataAccessors.Accessors
         }
 
 
-        public ICollection<Person> GetAll()
+        public IEnumerable<Person> GetAll()
         {
             DbConnection conn = _factory.CreateConnection();
             conn.ConnectionString = _connectionString;

@@ -34,7 +34,7 @@ namespace WinFormsClient
 
         
 
-        private void SetData(ICollection<Person> collection)
+        private void SetData(IEnumerable<Person> collection)
         {
             dataGridView1.Rows.Clear();
             foreach (Person p in collection)
@@ -45,7 +45,7 @@ namespace WinFormsClient
        
         private void ReloadData()
         {
-            ICollection<Person> coll = null;
+            IEnumerable<Person> coll = null;
             try
             {
                 coll = _personAccessor.GetAll();

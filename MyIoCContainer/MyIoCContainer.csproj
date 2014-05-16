@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C3CED0DC-1D96-4233-B673-3BED49428F7D}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{093DF233-4AF1-49BE-BFBA-04F10256BC0D}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DataInitializer</RootNamespace>
-    <AssemblyName>DataInitializer</AssemblyName>
+    <RootNamespace>MyIoCContainer</RootNamespace>
+    <AssemblyName>MyIoCContainer</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -41,21 +39,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="IIocContainer.cs" />
+    <Compile Include="InjectAttribute.cs" />
+    <Compile Include="ParametrizedResolverHelper.cs" />
+    <Compile Include="MyIoC.cs" />
+    <Compile Include="NameTypeValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DataAccessors\DataAccessors.csproj">
-      <Project>{cc4318d2-979f-4ef0-9125-283c7366d246}</Project>
-      <Name>DataAccessors</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DataProject\DataProject.csproj">
-      <Project>{0c85e7b9-7397-494c-8b5d-a1ac893b2dd5}</Project>
-      <Name>DataProject</Name>
-    </ProjectReference>
+    <Compile Include="Resolvers\IResolver.cs" />
+    <Compile Include="Resolvers\ObjectResolver.cs" />
+    <Compile Include="Resolvers\ParametrizedResolver.cs" />
+    <Compile Include="Resolvers\ResolverBase.cs" />
+    <Compile Include="Resolvers\SingletonTypeResolver.cs" />
+    <Compile Include="Resolvers\TypeResolver.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

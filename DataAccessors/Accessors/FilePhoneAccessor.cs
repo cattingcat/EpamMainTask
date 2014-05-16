@@ -28,7 +28,7 @@ namespace DataAccessors.Accessors
             }
         }
 
-        public ICollection<Phone> GetAll()
+        public IEnumerable<Phone> GetAll()
         {
             return _data;
         }

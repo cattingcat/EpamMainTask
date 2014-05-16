@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Управление общими сведениями о сборке осуществляется с помощью 
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
-[assembly: AssemblyTitle("DataInitializer")]
+[assembly: AssemblyTitle("MyIoCContainer")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("MICROSOFT")]
-[assembly: AssemblyProduct("DataInitializer")]
+[assembly: AssemblyProduct("MyIoCContainer")]
 [assembly: AssemblyCopyright("Copyright © MICROSOFT 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Следующий GUID служит для идентификации библиотеки типов, если этот проект будет видимым для COM
-[assembly: Guid("e4af9dc5-5491-4ae9-821e-13bcce825877")]
+[assembly: Guid("5c89c6d5-0c42-4559-956c-916f25d47c31")]
 
 // Сведения о версии сборки состоят из следующих четырех значений:
 //

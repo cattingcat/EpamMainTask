@@ -6,15 +6,12 @@ using System.Web.Mvc;
 
 namespace MvcClient.Controllers
 {
-    public class DefaultController : Controller
+    public class DefaultController : IController
     {
-        //
-        // GET: /Default/
 
-        public ActionResult Index()
+        public void Execute(System.Web.Routing.RequestContext requestContext)
         {
-            return View();
+            throw new NotImplementedException();
         }
-
     }
 }

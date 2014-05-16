@@ -17,7 +17,7 @@ namespace DataAccessors.Accessors
             _directoryName = path;
         }
 
-        public ICollection<Person> GetAll()
+        public IEnumerable<Person> GetAll()
         {
             ICollection<Person> res = new List<Person>();
             foreach (string filename in Directory.EnumerateFiles(_directoryName, "*.xml"))

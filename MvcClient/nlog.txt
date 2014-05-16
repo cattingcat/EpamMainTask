@@ -44,3 +44,30 @@
 04/23/2014 23:02:57|Trace|Phone controller /Index
 04/23/2014 23:03:00|Trace|Phone controller created
 04/23/2014 23:03:00|Trace|Phone controller /Create
+04/25/2014 13:07:14|Trace|Application start!
+04/25/2014 13:07:15|Trace|Ninject module load, current accessor: orm
+04/25/2014 13:07:15|Trace|Person controller created
+04/25/2014 13:07:15|Trace|Person controller /Index
+04/25/2014 13:07:30|Trace|Person controller created
+04/25/2014 13:07:30|Trace|Person controller /Details/0
+04/30/2014 12:29:01|Trace|Application start!
+04/30/2014 12:29:03|Trace|Ninject module load, current accessor: orm
+04/30/2014 12:29:04|Trace|Person controller created
+05/03/2014 15:11:05|Trace|Application start!
+05/03/2014 15:11:08|Trace|Ninject module load, current accessor: orm
+05/12/2014 15:49:08|Trace|Application start!
+05/12/2014 15:49:11|Trace|Ninject module load, current accessor: orm
+05/12/2014 15:49:11|Trace|Person controller created
+05/12/2014 15:51:37|Trace|Person controller /Index
+05/17/2014 01:28:09|Trace|Application start!
+05/17/2014 01:28:11|Trace|Ninject module load, current accessor: orm
+05/17/2014 01:28:12|Trace|Person controller created
+05/17/2014 01:28:17|Trace|Person controller /Index
+05/17/2014 01:33:30|Trace|Application start!
+05/17/2014 01:33:31|Trace|Ninject module load, current accessor: ado
+05/17/2014 01:33:31|Trace|Person controller created
+05/17/2014 01:33:31|Trace|Person controller /Index
+05/17/2014 01:43:51|Trace|Application start!
+05/17/2014 01:43:52|Trace|Ninject module load, current accessor: orm
+05/17/2014 01:43:52|Trace|Person controller created
+05/17/2014 01:43:52|Trace|Person controller /Index

@@ -17,7 +17,7 @@ namespace DataAccessors.Accessors
             _directoryName = path;
         }
 
-        public ICollection<Phone> GetAll()
+        public IEnumerable<Phone> GetAll()
         {
             ICollection<Phone> res = new List<Phone>();
             foreach (string filename in Directory.EnumerateFiles(_directoryName, "*.xml"))

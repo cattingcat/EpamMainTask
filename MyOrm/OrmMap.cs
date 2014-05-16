@@ -38,7 +38,7 @@ namespace MyOrm
             }
         }
 
-        public ICollection<string> Columns
+        public IEnumerable<string> Columns
         {
             get
             {
@@ -46,7 +46,7 @@ namespace MyOrm
             }
         }
 
-        public ICollection<string> Relations
+        public IEnumerable<string> Relations
         {
             get
             {
