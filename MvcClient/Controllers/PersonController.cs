@@ -7,7 +7,6 @@ using NLog;
 using DataAccessors.Accessors;
 using DataAccessors.Entity;
 
-using MvcClient.Models;
 using BusinessLogic;
 
 

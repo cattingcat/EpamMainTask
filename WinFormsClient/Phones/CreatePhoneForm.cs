@@ -1,4 +1,5 @@
-﻿using DataAccessors.Accessors;
+﻿using BusinessLogic;
+using DataAccessors.Accessors;
 using DataAccessors.Entity;
 using System;
 using System.Collections.Generic;
@@ -16,11 +17,11 @@ namespace WinFormsClient.Phones
     public partial class CreatePhoneForm : Form
     {
         public Phone Result { get; set; }
-        private IAccessor<Person> _personAccessor;
+        private IPersonBll _personBll;
 
-        public CreatePhoneForm(IAccessor<Person> personAccessor)
+        public CreatePhoneForm(IPersonBll personBll)
         {
-            _personAccessor = personAccessor;
+            _personBll = personBll;
             InitializeComponent();
         }
 
@@ -28,7 +29,7 @@ namespace WinFormsClient.Phones
         {
             try
             {
-                foreach (var p in _personAccessor.GetAll())
+                foreach (var p in _personBll.GetPersons())
                 {
                     comboBox1.Items.Add(p);
                 }

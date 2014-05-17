@@ -19,11 +19,12 @@ namespace WinFormsClient
     public partial class PersonListForm : Form
     {
         private IPersonBll _personBll;
-        private IAccessor<Phone> _phoneAccessor;
+        private IPhoneBll _phoneBll;
 
-        public PersonListForm(IPersonBll personBll)
+        public PersonListForm(IPersonBll personBll, IPhoneBll phoneBll)
         {
             _personBll = personBll;
+            _phoneBll = phoneBll;
             InitializeComponent();       
         }
 
@@ -84,7 +85,7 @@ namespace WinFormsClient
             if (col == 5) // show phone list button
             {
                 int personId = (int)dataGridView1.Rows[row].Cells[0].Value;
-                PhoneListForm f = Program.ResolveForm<PhoneListForm>();
+                PhoneListForm f = new PhoneListForm(_phoneBll);
                 f.OwnerId = personId;
                 f.ShowDialog();
             }
@@ -94,7 +95,7 @@ namespace WinFormsClient
 
         private void insertPerson_Click(object sender, EventArgs e)
         {
-            CreatePersonForm form = Program.ResolveForm<CreatePersonForm>();
+            CreatePersonForm form = new CreatePersonForm();
             DialogResult res = form.ShowDialog();
             if (res == System.Windows.Forms.DialogResult.OK)
             {
@@ -114,13 +115,13 @@ namespace WinFormsClient
 
         private void insertPhone_Click(object sender, EventArgs e)
         {
-            CreatePhoneForm form = Program.ResolveForm<CreatePhoneForm>();
+            CreatePhoneForm form = new CreatePhoneForm(_personBll);
             DialogResult res = form.ShowDialog();
             if (res == System.Windows.Forms.DialogResult.OK)
             {
                 try
                 {
-                    _phoneAccessor.Insert(form.Result);
+                    _phoneBll.AddPhone(form.Result);
                 }
                 catch (SqlException ex)
                 {
@@ -133,7 +134,7 @@ namespace WinFormsClient
 
         private void phoneWindowCall(object sender, EventArgs e)
         {
-            PhoneListForm plf = Program.ResolveForm<PhoneListForm>();
+            PhoneListForm plf = new PhoneListForm(_phoneBll);
             plf.Show();
         }
         #endregion
