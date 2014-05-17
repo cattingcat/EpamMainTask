@@ -1,8 +1,8 @@
-﻿using DataAccessors.Accessors;
+﻿using BusinessLogic;
+using DataAccessors.Accessors;
 using DataAccessors.Entity;
 using Ninject;
 using Ninject.Modules;
-using BusinessLogic;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -61,6 +61,7 @@ namespace WinFormsClient
                     break;
             }
             Kernel.Bind<IPersonBll>().To<PersonBll>();
+            Kernel.Bind<IPhoneBll>().To<PhoneBll>();
         }
     }
 }

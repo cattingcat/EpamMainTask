@@ -145,6 +145,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
+      <Project>{ae280abd-9f3a-4081-b560-437498bd977e}</Project>
+      <Name>BusinessLogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataAccessors\DataAccessors.csproj">
       <Project>{cc4318d2-979f-4ef0-9125-283c7366d246}</Project>
       <Name>DataAccessors</Name>

@@ -1,4 +1,5 @@
-﻿using DataAccessors.Accessors;
+﻿using BusinessLogic;
+using DataAccessors.Accessors;
 using DataAccessors.Entity;
 using System;
 using System.Collections.Generic;
@@ -15,12 +16,13 @@ namespace WinFormsClient.Phones
 {
     public partial class PhoneListForm : Form
     {
-        private IAccessor<Phone> _phoneAccessor;
+        private IPhoneBll _phoneBll;
+
         public int? OwnerId { get; set; }
 
-        public PhoneListForm(IAccessor<Phone> phoneAccessor)
+        public PhoneListForm(IPhoneBll phoneBll)
         {
-            _phoneAccessor = phoneAccessor;
+            _phoneBll = phoneBll;
             InitializeComponent();
         }
 
@@ -40,11 +42,11 @@ namespace WinFormsClient.Phones
             {
                 if (OwnerId.HasValue)
                 {
-                    phones = from p in _phoneAccessor.GetAll() where p.PersonId == OwnerId.Value select p;
+                    phones =  _phoneBll.GetPhones(OwnerId.Value);
                 }
                 else
                 {
-                    phones = _phoneAccessor.GetAll();
+                    phones = _phoneBll.GetPhones();
                 }
             }
             catch (SqlException ex)
@@ -72,7 +74,7 @@ namespace WinFormsClient.Phones
                 int phoneId = (int)dataGridView1.Rows[row].Cells[0].Value;
                 try
                 {
-                    _phoneAccessor.DeleteById(phoneId);
+                    _phoneBll.DeletePhone(phoneId);
                 }
                 catch (SqlException ex)
                 {
