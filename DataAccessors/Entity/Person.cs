@@ -26,12 +26,12 @@ namespace DataAccessors.Entity
         public DateTime DayOfBirth { get; set; }       
         [XmlIgnore]
         [Many(SecondTable = "PhoneTbl", SecondColumn = "person_id")]
-        public ICollection<Phone> Phones { get; set; }
+        public IEnumerable<Phone> Phones { get; set; }
 
         public override string ToString()
         {
             return String.Format("id: {0, 5}, name: {1, 10}, lastname: {2, 10}, DayOfBirth: {3}, Phones: {4, 3}",
-                Id, Name.Trim(), LastName.Trim(), DayOfBirth.ToString("d MMM yyyy"), Phones == null ? 0 : Phones.Count);
+                Id, Name.Trim(), LastName.Trim(), DayOfBirth.ToString("d MMM yyyy"), Phones == null ? 0 : 1);
         }
         
         /* public override string ToString()

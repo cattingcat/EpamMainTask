@@ -8,6 +8,7 @@ using DataAccessors.Accessors;
 using DataAccessors.Entity;
 
 using MvcClient.Models;
+using BusinessLogic;
 
 
 namespace MvcClient.Controllers
@@ -16,15 +17,12 @@ namespace MvcClient.Controllers
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        private IAccessor<Person> _personAccessor;
-        private IAccessor<Phone> _phoneAccessor;
+        private IPersonBll _personBll;
 
-        public PersonController(IAccessor<Person> personAccessor, IAccessor<Phone> phoneAccessor)
+        public PersonController(IPersonBll personBll)
         {
             logger.Trace("Person controller created");
-
-            _personAccessor = personAccessor;
-            _phoneAccessor = phoneAccessor;
+            _personBll = personBll;
         }
 
         // GET: /Person/
@@ -32,17 +30,14 @@ namespace MvcClient.Controllers
         {            
             logger.Trace("Person controller /Index");
 
-            return View(_personAccessor.GetAll());
+            return View(_personBll.GetPersons());
         }
         
         // GET: /Person/Details/5
         public ActionResult Details(int id)
         {
-            logger.Trace("Person controller /Details/{0}", id);
-
-            Person person = _personAccessor.GetAll().SingleOrDefault(p => p.Id == id);
-            var phones = from p in _phoneAccessor.GetAll() where p.PersonId == id select p;           
-            return View(new PersonWithPhonesViewModel {Owner = person, Phones = phones });
+            logger.Trace("Person controller /Details/{0}", id);        
+            return View(_personBll.GetPerson(id));
         }
         
         // GET: /Person/Create
@@ -59,7 +54,7 @@ namespace MvcClient.Controllers
         {
             logger.Trace("Person controller /Create/{0} POST", person.Id);
 
-            _personAccessor.Insert(person);
+            _personBll.AddPerson(person);
             return RedirectToAction("Index");
         }
         
@@ -71,7 +66,7 @@ namespace MvcClient.Controllers
 
             try
             {
-                _personAccessor.DeleteById(id);
+                _personBll.DeletePerson(id);
                 return RedirectToAction("Index");
             }
             catch (SqlException e)

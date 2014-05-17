@@ -1,6 +1,7 @@
 ﻿using DataAccessors.Accessors;
 using DataAccessors.Entity;
 using NLog;
+using BusinessLogic;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -14,15 +15,15 @@ namespace MvcClient.Controllers
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        private IAccessor<Person> _personAccessor;
-        private IAccessor<Phone> _phoneAccessor;
+        private IPhoneBll _phoneBll;
+        private IPersonBll _personBll;
 
-        public PhoneController(IAccessor<Phone> phoneAccessor, IAccessor<Person> personAccessor)
+        public PhoneController(IPhoneBll phoneBll, IPersonBll personBll)
         {
             logger.Trace("Phone controller created");
 
-            _personAccessor = personAccessor;
-            _phoneAccessor = phoneAccessor;
+            _phoneBll = phoneBll;
+            _personBll = personBll;
         }
 
         // GET: /Phone/
@@ -30,7 +31,7 @@ namespace MvcClient.Controllers
         {
             logger.Trace("Phone controller /Index");
 
-            return View(_phoneAccessor.GetAll());
+            return View(_phoneBll.GetPhones());
         }
         
         // GET: /Phone/Details/5
@@ -39,7 +40,7 @@ namespace MvcClient.Controllers
         {
             logger.Trace("Phone controller /Details/{0}", id);
 
-            Phone phone = _phoneAccessor.GetAll().SingleOrDefault(p => p.Id == id);   
+            Phone phone = _phoneBll.GetPhones().SingleOrDefault(p => p.Id == id);   
             var dict = new System.Web.Routing.RouteValueDictionary();
             dict.Add("id", phone.PersonId);
             return RedirectToAction("Details", "Person", dict);        
@@ -50,7 +51,7 @@ namespace MvcClient.Controllers
         {
             logger.Trace("Phone controller /Create");
 
-            ViewBag.Persons = _personAccessor.GetAll();
+            ViewBag.Persons = _personBll.GetPersons();
             return View();
         }
         
@@ -60,7 +61,7 @@ namespace MvcClient.Controllers
         {
             logger.Trace("Phone controller /Create POST {0}", phone.Id);
 
-            _phoneAccessor.Insert(phone);
+            _phoneBll.AddPhone(phone);
             return RedirectToAction("Index");
         }
         
@@ -72,7 +73,7 @@ namespace MvcClient.Controllers
 
             try
             {
-                _phoneAccessor.DeleteById(id);
+                _phoneBll.DeletePhone(id);
                 return RedirectToAction("Index");
             }
             catch (SqlException e)

@@ -1,5 +1,6 @@
 ﻿@using MvcClient.Models
-@model PersonWithPhonesViewModel
+@using DataAccessors.Entity
+@model Person
 
 @{
     ViewBag.Title = "Details";
@@ -20,12 +21,12 @@
         </thead>
         <tbody>            
             <tr>
-                <td> @Model.Owner.Id </td>
-                <td> @Model.Owner.Name </td>
-                <td> @Model.Owner.LastName </td>
-                <td> @Model.Owner.DayOfBirth.ToString("d MMM yyyy") </td>
+                <td> @Model.Id </td>
+                <td> @Model.Name </td>
+                <td> @Model.LastName </td>
+                <td> @Model.DayOfBirth.ToString("d MMM yyyy") </td>
                 <td>
-                    <form action="/Person/Delete/@Model.Owner.Id" method="post">
+                    <form action="/Person/Delete/@Model.Id" method="post">
                         <button type="submit" class="btn btn-xs btn-danger">Delete</button>
                     </form>
                 </td>                

@@ -33,18 +33,18 @@ namespace UnitTestProject
 
     class MsTimer : IDisposable
     {
-        private Stopwatch sw;
+        private Stopwatch _sw;
 
         public MsTimer()
         {
-            sw = new Stopwatch();
-            sw.Start();
+            _sw = new Stopwatch();
+            _sw.Start();
         }
 
         public void Dispose()
         {
-            sw.Stop();
-            Console.WriteLine("Complete! elapsed: {0}ms", sw.ElapsedMilliseconds);
+            _sw.Stop();
+            Console.WriteLine("Complete! elapsed: {0}ms", _sw.ElapsedMilliseconds);
         }
     }
 

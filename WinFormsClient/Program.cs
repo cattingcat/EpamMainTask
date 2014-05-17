@@ -2,6 +2,7 @@
 using DataAccessors.Entity;
 using Ninject;
 using Ninject.Modules;
+using BusinessLogic;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -59,6 +60,7 @@ namespace WinFormsClient
                 case "mem":
                     break;
             }
+            Kernel.Bind<IPersonBll>().To<PersonBll>();
         }
     }
 }

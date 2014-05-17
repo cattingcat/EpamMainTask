@@ -16,7 +16,7 @@
         from person in (ViewBag.Persons as IEnumerable<Person>) select new SelectListItem { Text = person.ToString(), Value = person.Id.ToString() },
         new { Class = "form-control" }
     );
-    <button class="btn btn-lg btn-primary btn-block" type="button">Submit</button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 }
 </div>
 

@@ -1,6 +1,7 @@
 ﻿using DataAccessors.Accessors;
 using DataAccessors.Data;
 using DataAccessors.Entity;
+using BusinessLogic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,13 +18,12 @@ namespace WinFormsClient
 {
     public partial class PersonListForm : Form
     {
-        private IAccessor<Person> _personAccessor;
+        private IPersonBll _personBll;
         private IAccessor<Phone> _phoneAccessor;
 
-        public PersonListForm(IAccessor<Person> personAccessor, IAccessor<Phone> phoneAccessor)
+        public PersonListForm(IPersonBll personBll)
         {
-            _personAccessor = personAccessor;
-            _phoneAccessor = phoneAccessor;
+            _personBll = personBll;
             InitializeComponent();       
         }
 
@@ -48,7 +48,7 @@ namespace WinFormsClient
             IEnumerable<Person> coll = null;
             try
             {
-                coll = _personAccessor.GetAll();
+                coll = _personBll.GetPersons();
             }
             catch (SqlException e)
             {
@@ -71,7 +71,7 @@ namespace WinFormsClient
 
                 try
                 {
-                    _personAccessor.DeleteById(personId);
+                    _personBll.DeletePerson(personId);
                 }
                 catch (SqlException ex)
                 {
@@ -100,7 +100,7 @@ namespace WinFormsClient
             {
                 try
                 {
-                    _personAccessor.Insert(form.Result);
+                    _personBll.AddPerson(form.Result);
                 }
                 catch (SqlException ex)
                 {

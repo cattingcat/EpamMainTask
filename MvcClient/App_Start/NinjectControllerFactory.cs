@@ -9,6 +9,7 @@ using NLog;
 
 using DataAccessors.Accessors;
 using DataAccessors.Entity;
+using BusinessLogic;
 
 
 namespace MvcClient
@@ -29,6 +30,8 @@ namespace MvcClient
         {
             return _ninjectKernel.Get(controllerType) as IController;
         }
+
+
 
         private class RegisterDependencies : NinjectModule
         {
@@ -65,6 +68,8 @@ namespace MvcClient
                     case "mem":
                         break;
                 }
+                Kernel.Bind<IPersonBll>().To<PersonBll>();
+                Kernel.Bind<IPhoneBll>().To<PhoneBll>();
 
                 logger.Trace("Ninject module load, current accessor: {0}", accessorType);
             }

@@ -21,8 +21,8 @@ namespace UnitTestProject
 
             Mock<IAccessor<Phone>> phoneMock = new Mock<IAccessor<Phone>>();
 
-            PersonController pc = new PersonController(personMock.Object, phoneMock.Object);
-            pc.Index();
+            //PersonController pc = new PersonController(personMock.Object, phoneMock.Object);
+           // pc.Index();
         }
     }
 }
