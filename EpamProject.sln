@@ -32,6 +32,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Instrumental", "Instrumenta
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{AE280ABD-9F3A-4081-B560-437498BD977E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{5E712D26-FCDF-4692-9ADE-7380F9D97991}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnitTests", "NUnitTests\NUnitTests.csproj", "{6E11F42E-9E30-499C-9225-1678A29A19CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,6 +87,10 @@ Global
 		{AE280ABD-9F3A-4081-B560-437498BD977E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE280ABD-9F3A-4081-B560-437498BD977E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE280ABD-9F3A-4081-B560-437498BD977E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E11F42E-9E30-499C-9225-1678A29A19CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E11F42E-9E30-499C-9225-1678A29A19CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E11F42E-9E30-499C-9225-1678A29A19CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E11F42E-9E30-499C-9225-1678A29A19CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -90,5 +103,6 @@ Global
 		{019C22F3-0612-4151-A617-7A052583CEB8} = {EDB071A8-6009-4D69-A939-8575C27EE9DF}
 		{5BEFB719-E66C-44AE-94E4-A7A902876EF0} = {EDB071A8-6009-4D69-A939-8575C27EE9DF}
 		{22BC0201-4796-4A7A-9F2B-813710574C87} = {E0E4566E-61AD-43E6-B1F3-FC125797F6EF}
+		{6E11F42E-9E30-499C-9225-1678A29A19CB} = {E0E4566E-61AD-43E6-B1F3-FC125797F6EF}
 	EndGlobalSection
 EndGlobal
