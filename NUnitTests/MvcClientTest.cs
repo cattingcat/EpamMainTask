@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace NUnitTests
 {
-    private class TestBusinessLogic : IPersonBll
+    internal class TestBusinessLogic : IPersonBll
     {
         ICollection<Person> _persons = new LinkedList<Person>();
 
