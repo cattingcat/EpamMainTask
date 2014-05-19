@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
@@ -46,12 +49,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomIoCTests.cs" />
+    <Compile Include="MvcClientTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
+      <Project>{ae280abd-9f3a-4081-b560-437498bd977e}</Project>
+      <Name>BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAccessors\DataAccessors.csproj">
+      <Project>{cc4318d2-979f-4ef0-9125-283c7366d246}</Project>
+      <Name>DataAccessors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcClient\MvcClient.csproj">
+      <Project>{5befb719-e66c-44ae-94e4-a7a902876ef0}</Project>
+      <Name>MvcClient</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyIoCContainer\MyIoCContainer.csproj">
       <Project>{093df233-4af1-49be-bfba-04f10256bc0d}</Project>
       <Name>MyIoCContainer</Name>
