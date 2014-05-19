@@ -58,7 +58,7 @@ namespace NUnitTests
     public class MvcClientTest
     {
         [Test]
-        void PersonControllerTest()
+        public void PersonControllerTest()
         {
 
             TestBusinessLogic testBl = new TestBusinessLogic();
