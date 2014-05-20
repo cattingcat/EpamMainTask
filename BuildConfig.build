@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+  ToolsVersion="4.0"
+  DefaultTargets="BuildAndCopy">
+
+  <PropertyGroup>
+    <Config>Release</Config>
+    <CopiedProject>MvcClient</CopiedProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectToBuild Include="EpamProject.sln">
+      <Properties>Configuration=$(Config)</Properties>
+    </ProjectToBuild>
+  
+    <MVCFiles Include="$(MSBuildProjectDirectory)\$(CopiedProject)\Bin\*"/>
+  </ItemGroup>
+
+  <Target Name="Build">
+    <Message Text="Build started" />
+    <MSBuild Projects="@(ProjectToBuild)"/>
+    <Message Text="Build finished" />  
+  </Target>
+  
+  <Target Name="BuildAndCopy">
+    <Message Text="Build started" />
+    <MSBuild Projects="@(ProjectToBuild)"/>
+    <Copy SourceFiles="@(MVCFiles)"
+          DestinationFiles="@(MVCFiles->'c:\MVCDestinationTree\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Message Text="Build finished" />  
+  </Target>
+
+</Project>
