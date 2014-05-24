@@ -72,7 +72,6 @@ namespace NUnitTests
 
             PersonController controller = new PersonController(testBl);
             controller.Create();
-            controller.Delete(1);
             controller.Details(4);
             controller.Index();
         }

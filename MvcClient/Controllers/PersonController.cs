@@ -14,20 +14,21 @@ namespace MvcClient.Controllers
 {
     public class PersonController : Controller
     {
-        private static Logger logger = LogManager.GetCurrentClassLogger();
-
+        private Logger _logger;
         private IPersonBll _personBll;
 
         public PersonController(IPersonBll personBll)
-        {
-            logger.Trace("Person controller created");
+        {            
             _personBll = personBll;
+            _logger = LogManager.GetCurrentClassLogger();
+
+            _logger.Trace("Person controller created");
         }
 
         // GET: /Person/
         public ActionResult Index()
         {            
-            logger.Trace("Person controller /Index");
+            _logger.Trace("Person controller /Index");
 
             return View(_personBll.GetPersons());
         }
@@ -35,14 +36,14 @@ namespace MvcClient.Controllers
         // GET: /Person/Details/5
         public ActionResult Details(int id)
         {
-            logger.Trace("Person controller /Details/{0}", id);        
+            _logger.Trace("Person controller /Details/{0}", id);        
             return View(_personBll.GetPerson(id));
         }
         
         // GET: /Person/Create
         public ActionResult Create()
         {
-            logger.Trace("Person controller /Create");
+            _logger.Trace("Person controller /Create");
 
             return View();
         }
@@ -51,7 +52,7 @@ namespace MvcClient.Controllers
         [HttpPost]
         public ActionResult Create(Person person)
         {
-            logger.Trace("Person controller /Create/{0} POST", person.Id);
+            _logger.Trace("Person controller /Create/{0} POST", person.Id);
 
             _personBll.AddPerson(person);
             return RedirectToAction("Index");
@@ -59,20 +60,29 @@ namespace MvcClient.Controllers
         
         // POST: /Person/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int id, int? captcha)
         {
-            logger.Trace("Person controller /Delete/{0}", id);
+            _logger.Trace("Person controller /Delete/{0}", id);
 
-            try
+            object cpt = Session["captcha"];
+
+            if (cpt != null && captcha.HasValue && captcha.Value == (int)cpt)
             {
-                _personBll.DeletePerson(id);
+                try
+                {
+                    _personBll.DeletePerson(id);
+                    return RedirectToAction("Index");
+                }
+                catch (SqlException e)
+                {
+                    Session.Add("Exception", e);
+                    return RedirectToAction("Index", "Exception");
+                }
+            }
+            else
+            {
                 return RedirectToAction("Index");
             }
-            catch (SqlException e)
-            {
-                Session.Add("Exception", e);
-                return RedirectToAction("Index", "Exception");                
-            }            
         }     
     }
 }

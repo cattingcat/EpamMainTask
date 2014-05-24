@@ -85,8 +85,6 @@ namespace MyIoCContainer
 
         public void Register(Type interfaceType, Type concreteType)
         {
-            if (!interfaceType.IsInterface)
-                throw new ArgumentException("Parameter must be interface!");
             IResolver resolver = new TypeResolver(this, concreteType);
             _resolverPool.Add(interfaceType, resolver);
         }
@@ -105,8 +103,6 @@ namespace MyIoCContainer
 
         public void RegisterSingleScope(Type interfaceType, Type concreteType)
         {
-            if (!interfaceType.IsInterface)
-                throw new ArgumentException("Parameter must be interface!");
             IResolver resolver = new SingletonTypeResolver(this, concreteType);
             _resolverPool.Add(interfaceType, resolver);
         }

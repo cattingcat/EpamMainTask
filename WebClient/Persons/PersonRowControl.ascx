@@ -8,6 +8,6 @@
         <button type="submit" value="<%= this.Item.Id %>" name="delete" class="btn btn-xs btn-danger">Delete</button>
     </td>
     <td>
-        <a href="/PhoneList?ownerId=<%= this.Item.Id %>" class="btn btn-xs btn-outline" role="button">Phones</a>
+        <a href="/Phones/PhoneList.aspx?ownerId=<%= this.Item.Id %>" class="btn btn-xs btn-outline" role="button">Phones</a>
     </td>
 </tr>

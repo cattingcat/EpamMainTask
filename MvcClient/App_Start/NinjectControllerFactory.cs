@@ -28,6 +28,8 @@ namespace MvcClient
 
         protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
         {
+            if (controllerType == null)
+                return null;
             return _ninjectKernel.Get(controllerType) as IController;
         }
 

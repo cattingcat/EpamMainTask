@@ -7,37 +7,48 @@
 
 
 <div class="table-responsive">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Last name</th>
-                <th>Date of birth</th>
-                <th>Delete</th>
-                <th>Details</th>
-            </tr>
-        </thead>
-        <tbody>
-@foreach (var p in Model)
-{
-            <tr>
-                <td> @p.Id </td>
-                <td> @p.Name </td>
-                <td> @p.LastName </td>
-                <td> @p.DayOfBirth.ToString("d MMM yyyy") </td>
-                <td>
-                    <form action="/Person/Delete/@p.Id" method="post">
-                        <button type="submit" class="btn btn-xs btn-danger">Delete</button>
-                    </form>
-                </td>
-                <td>
-                    <a href="/Person/Details/@p.Id" class="btn btn-xs btn-outline" role="button">Details</a>
-                </td>
-            </tr>
-}
-        </tbody>
-    </table>
+    <form action="/Person/Delete" method="post">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Last name</th>
+                    <th>Date of birth</th>
+                    <th>Delete</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in Model)
+                {
+                    <tr>
+                        <td> @p.Id </td>
+                        <td> @p.Name </td>
+                        <td> @p.LastName </td>
+                        <td> @p.DayOfBirth.ToString("d MMM yyyy") </td>
+                        <td>
+                            <button type="submit" class="btn btn-xs btn-danger" name="id" value="@p.Id">Delete</button>
+                        </td>
+                        <td>
+                            <a href="/Person/Details/@p.Id" class="btn btn-xs btn-outline" role="button">Details</a>
+                        </td>
+                    </tr>
+                }              
+            </tbody>
+        </table>
+        <div class="col-sm-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Captcha</h3>
+                </div>
+                <div class="panel-body">
+                    <img src="/captcha.jpg" />
+                    <input type="number" name="captcha" />
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 <div class="col-sm-4">
     <h3>Insert person</h3>

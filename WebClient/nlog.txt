@@ -1155,3 +1155,147 @@ The statement has been terminated.
 04/23/2014 14:54:57|Trace|PersonList pre-render
 04/23/2014 14:54:59|Trace|App_begin request start!
 04/23/2014 14:54:59|Trace|App auth request!
+05/24/2014 23:23:23|Trace|App start!
+05/24/2014 23:23:23|Trace|App_begin request start!
+05/24/2014 23:23:23|Trace|App auth request!
+05/24/2014 23:23:27|Trace|Session start!
+05/24/2014 23:23:27|Trace|PersonList init
+05/24/2014 23:23:27|Trace|PersonList load
+05/24/2014 23:23:27|Trace|PersonList pre-render
+05/24/2014 23:24:22|Trace|App start!
+05/24/2014 23:24:23|Trace|App_begin request start!
+05/24/2014 23:24:23|Trace|App auth request!
+05/24/2014 23:24:27|Trace|Session start!
+05/24/2014 23:24:27|Trace|PersonList init
+05/24/2014 23:24:27|Trace|PersonList load
+05/24/2014 23:24:27|Trace|PersonList pre-render
+05/24/2014 23:24:31|Trace|App_begin request start!
+05/24/2014 23:24:31|Trace|App auth request!
+05/24/2014 23:24:36|Trace|App_begin request start!
+05/24/2014 23:24:36|Trace|App auth request!
+05/24/2014 23:24:36|Trace|App error!
+05/24/2014 23:25:29|Trace|App start!
+05/24/2014 23:25:29|Trace|App_begin request start!
+05/24/2014 23:25:29|Trace|App auth request!
+05/24/2014 23:25:30|Trace|Session start!
+05/24/2014 23:25:31|Trace|PersonList init
+05/24/2014 23:25:31|Trace|PersonList load
+05/24/2014 23:25:31|Trace|PersonList pre-render
+05/24/2014 23:26:15|Trace|App start!
+05/24/2014 23:26:15|Trace|App_begin request start!
+05/24/2014 23:26:15|Trace|App auth request!
+05/24/2014 23:26:15|Trace|Session start!
+05/24/2014 23:26:16|Trace|PersonList init
+05/24/2014 23:26:16|Trace|PersonList load
+05/24/2014 23:26:16|Trace|PersonList pre-render
+05/24/2014 23:26:19|Trace|App_begin request start!
+05/24/2014 23:26:19|Trace|App auth request!
+05/24/2014 23:26:21|Trace|App_begin request start!
+05/24/2014 23:26:21|Trace|App auth request!
+05/24/2014 23:27:33|Trace|App start!
+05/24/2014 23:27:33|Trace|App_begin request start!
+05/24/2014 23:27:33|Trace|App auth request!
+05/24/2014 23:27:34|Trace|Session start!
+05/24/2014 23:27:34|Trace|PersonList init
+05/24/2014 23:27:34|Trace|PersonList load
+05/24/2014 23:27:34|Trace|PersonList pre-render
+05/24/2014 23:27:36|Trace|App_begin request start!
+05/24/2014 23:27:36|Trace|App auth request!
+05/24/2014 23:27:43|Trace|App_begin request start!
+05/24/2014 23:27:43|Trace|App auth request!
+05/24/2014 23:43:17|Trace|App start!
+05/24/2014 23:43:17|Trace|App_begin request start!
+05/24/2014 23:43:17|Trace|App auth request!
+05/24/2014 23:43:17|Trace|Session start!
+05/24/2014 23:43:18|Trace|PersonList init
+05/24/2014 23:43:18|Trace|PersonList load
+05/24/2014 23:43:18|Trace|PersonList pre-render
+05/24/2014 23:44:56|Trace|App start!
+05/24/2014 23:44:56|Trace|App_begin request start!
+05/24/2014 23:44:56|Trace|App auth request!
+05/24/2014 23:44:57|Trace|Session start!
+05/24/2014 23:44:57|Trace|PersonList init
+05/24/2014 23:44:57|Trace|PersonList load
+05/24/2014 23:44:57|Trace|PersonList pre-render
+05/24/2014 23:45:01|Trace|App_begin request start!
+05/24/2014 23:45:01|Trace|App auth request!
+05/24/2014 23:45:02|Trace|App_begin request start!
+05/24/2014 23:45:02|Trace|App auth request!
+05/24/2014 23:45:02|Trace|PersonList init
+05/24/2014 23:45:02|Trace|PersonList load
+05/24/2014 23:45:02|Warn|Person list load throw SQL exception: The DELETE statement conflicted with the REFERENCE constraint "FK__PhoneTbl__person__17F790F9". The conflict occurred in database "C:\USERS\PC-1\DESKTOP\EPAMCLIENTS\EPAMPROJECT\WEBCLIENT\APP_DATA\SERVICEDATABASE.MDF", table "dbo.PhoneTbl", column 'person_id'.
+The statement has been terminated.
+05/24/2014 23:45:02|Warn|Person list load throw SQL exception: The DELETE statement conflicted with the REFERENCE constraint "FK__PhoneTbl__person__17F790F9". The conflict occurred in database "C:\USERS\PC-1\DESKTOP\EPAMCLIENTS\EPAMPROJECT\WEBCLIENT\APP_DATA\SERVICEDATABASE.MDF", table "dbo.PhoneTbl", column 'person_id'.
+The statement has been terminated.
+05/24/2014 23:45:05|Trace|App_begin request start!
+05/24/2014 23:45:05|Trace|App auth request!
+05/24/2014 23:45:16|Trace|App_begin request start!
+05/24/2014 23:45:16|Trace|App auth request!
+05/24/2014 23:45:16|Trace|PersonList init
+05/24/2014 23:45:16|Trace|PersonList load
+05/24/2014 23:45:16|Trace|PersonList pre-render
+05/24/2014 23:45:17|Trace|App_begin request start!
+05/24/2014 23:45:17|Trace|App auth request!
+05/24/2014 23:45:20|Trace|App_begin request start!
+05/24/2014 23:45:20|Trace|App auth request!
+05/24/2014 23:45:31|Trace|App_begin request start!
+05/24/2014 23:45:31|Trace|App auth request!
+05/24/2014 23:45:32|Trace|phone page load
+05/24/2014 23:45:32|Trace|phone page rpe render
+05/24/2014 23:45:33|Trace|App_begin request start!
+05/24/2014 23:45:33|Trace|App auth request!
+05/24/2014 23:45:34|Trace|App_begin request start!
+05/24/2014 23:45:34|Trace|App auth request!
+05/24/2014 23:45:34|Trace|phone page load
+05/24/2014 23:45:34|Trace|phone page rpe render
+05/24/2014 23:45:35|Trace|App_begin request start!
+05/24/2014 23:45:35|Trace|App auth request!
+05/24/2014 23:50:38|Trace|App start!
+05/24/2014 23:50:39|Trace|App_begin request start!
+05/24/2014 23:50:39|Trace|App auth request!
+05/24/2014 23:50:40|Trace|Session start!
+05/24/2014 23:50:40|Trace|PersonList init
+05/24/2014 23:50:40|Trace|PersonList load
+05/24/2014 23:50:40|Trace|PersonList pre-render
+05/24/2014 23:50:44|Trace|App_begin request start!
+05/24/2014 23:50:44|Trace|App auth request!
+05/24/2014 23:50:45|Trace|App_begin request start!
+05/24/2014 23:50:45|Trace|App auth request!
+05/24/2014 23:51:05|Trace|App_begin request start!
+05/24/2014 23:51:05|Trace|App auth request!
+05/24/2014 23:51:05|Trace|PersonList init
+05/24/2014 23:51:05|Trace|PersonList load
+05/25/2014 00:09:01|Trace|App start!
+05/25/2014 00:09:01|Trace|App_begin request start!
+05/25/2014 00:09:01|Trace|App auth request!
+05/25/2014 00:09:02|Trace|Session start!
+05/25/2014 00:09:02|Trace|phone page load
+05/25/2014 00:09:02|Trace|phone page rpe render
+05/25/2014 00:09:03|Trace|App_begin request start!
+05/25/2014 00:09:03|Trace|App auth request!
+05/25/2014 00:09:04|Trace|App_begin request start!
+05/25/2014 00:09:04|Trace|App auth request!
+05/25/2014 00:09:06|Trace|App_begin request start!
+05/25/2014 00:09:06|Trace|App auth request!
+05/25/2014 00:09:06|Trace|phone page load
+05/25/2014 00:09:06|Trace|phone page rpe render
+05/25/2014 00:09:07|Trace|App_begin request start!
+05/25/2014 00:09:07|Trace|App auth request!
+05/25/2014 00:09:07|Trace|App_begin request start!
+05/25/2014 00:09:07|Trace|App auth request!
+05/25/2014 00:09:09|Trace|App_begin request start!
+05/25/2014 00:09:09|Trace|App auth request!
+05/25/2014 00:09:09|Trace|phone page load
+05/25/2014 00:09:09|Trace|phone page rpe render
+05/25/2014 00:09:10|Trace|App_begin request start!
+05/25/2014 00:09:10|Trace|App auth request!
+05/25/2014 00:09:10|Trace|App_begin request start!
+05/25/2014 00:09:10|Trace|App auth request!
+05/25/2014 00:09:17|Trace|App_begin request start!
+05/25/2014 00:09:17|Trace|App auth request!
+05/25/2014 00:09:17|Trace|phone page load
+05/25/2014 00:09:17|Trace|phone page rpe render
+05/25/2014 00:09:18|Trace|App_begin request start!
+05/25/2014 00:09:18|Trace|App auth request!
+05/25/2014 00:09:18|Trace|App_begin request start!
+05/25/2014 00:09:18|Trace|App auth request!

@@ -27,7 +27,9 @@ namespace WebClient.Phones
             try
             {               
                 string phoneId = Request["delete"];
-                if (!string.IsNullOrEmpty(phoneId))
+                string captcha = Request["captcha"];
+
+                if (!string.IsNullOrEmpty(captcha) && int.Parse(captcha) == (int)Session["captcha"] && !string.IsNullOrEmpty(phoneId))
                 {
                     _phoneAccessor.DeleteById(int.Parse(phoneId));
                 }

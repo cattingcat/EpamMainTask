@@ -48,6 +48,11 @@ namespace UnitTestProject
         }
     }
 
+    class ListTest
+    {
+        public ListTest(List<int> l) { }
+    }
+
 
     [TestClass]
     public class CustomIoCTests
@@ -56,7 +61,7 @@ namespace UnitTestProject
         public void IoCTest()
         {
             #region IoC time tests
-            int N = 10000;
+            int N = 1000;
             using (new MsTimer())
             {
                 MyIoC ioc = new MyIoC();
@@ -95,6 +100,13 @@ namespace UnitTestProject
             Console.WriteLine(c.Resolve<ICollection<int>>().GetType().Name);
 
             var tmp = c.Resolve<Dependended>(new { a = 77, b = 88, c = new[] { 1, 2, 3 } });
+
+            c.Register<List<int>>(new List<int>());
+            object o = c.Resolve<ListTest>();
+            if (o != null)
+            {
+            }
+
         }
     }
 }

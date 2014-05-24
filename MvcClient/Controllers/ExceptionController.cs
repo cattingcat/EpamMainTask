@@ -7,13 +7,18 @@ namespace MvcClient.Controllers
 {
     public class ExceptionController: Controller
     {
-        private static Logger logger = LogManager.GetCurrentClassLogger();
+        private Logger _logger;
+
+        public ExceptionController()
+        {
+            _logger = LogManager.GetCurrentClassLogger();
+        }
 
         public ViewResult Index()
         {            
             Exception e = Session["Exception"] as Exception;
 
-            logger.Warn("Exception controller called, message: {0}", e.Message);
+            _logger.Warn("Exception controller called, message: {0}", e.Message);
 
             return View(e);
         }
@@ -23,7 +28,7 @@ namespace MvcClient.Controllers
             base.OnActionExecuted(filterContext);
             Session.Remove("Exception");
 
-            logger.Trace("Exception controller finished, session cleared");
+            _logger.Trace("Exception controller finished, session cleared");
         }
     }
 }

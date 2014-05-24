@@ -13,23 +13,23 @@ namespace MvcClient.Controllers
 {
     public class PhoneController : Controller
     {
-        private static Logger logger = LogManager.GetCurrentClassLogger();
-
+        private Logger _logger;
         private IPhoneBll _phoneBll;
         private IPersonBll _personBll;
 
         public PhoneController(IPhoneBll phoneBll, IPersonBll personBll)
-        {
-            logger.Trace("Phone controller created");
-
+        {         
             _phoneBll = phoneBll;
             _personBll = personBll;
+            _logger = LogManager.GetCurrentClassLogger();
+
+            _logger.Trace("Phone controller created");
         }
 
         // GET: /Phone/
         public ActionResult Index()
         {
-            logger.Trace("Phone controller /Index");
+            _logger.Trace("Phone controller /Index");
 
             return View(_phoneBll.GetPhones());
         }
@@ -38,7 +38,7 @@ namespace MvcClient.Controllers
         // Redirect to owner-person details
         public ActionResult Details(int id)
         {
-            logger.Trace("Phone controller /Details/{0}", id);
+            _logger.Trace("Phone controller /Details/{0}", id);
 
             Phone phone = _phoneBll.GetPhones().SingleOrDefault(p => p.Id == id);   
             var dict = new System.Web.Routing.RouteValueDictionary();
@@ -49,7 +49,7 @@ namespace MvcClient.Controllers
         // GET: /Phone/Create
         public ActionResult Create()
         {
-            logger.Trace("Phone controller /Create");
+            _logger.Trace("Phone controller /Create");
 
             ViewBag.Persons = _personBll.GetPersons();
             return View();
@@ -59,7 +59,7 @@ namespace MvcClient.Controllers
         [HttpPost]
         public ActionResult Create(Phone phone)
         {
-            logger.Trace("Phone controller /Create POST {0}", phone.Id);
+            _logger.Trace("Phone controller /Create POST {0}", phone.Id);
 
             _phoneBll.AddPhone(phone);
             return RedirectToAction("Index");
@@ -67,20 +67,27 @@ namespace MvcClient.Controllers
         
         // POST: /Phone/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int id, int? captcha)
         {
-            logger.Trace("Phone controller /Delete/{0}", id);
+            _logger.Trace("Phone controller /Delete/{0}", id);
 
-            try
+            object cpt = Session["captcha"];
+
+            if (cpt != null && captcha.HasValue && captcha.Value == (int)cpt)
             {
-                _phoneBll.DeletePhone(id);
-                return RedirectToAction("Index");
+
+                try
+                {
+                    _phoneBll.DeletePhone(id);
+                    return RedirectToAction("Index");
+                }
+                catch (SqlException e)
+                {
+                    Session.Add("Exception", e);
+                    return RedirectToAction("Index", "Exception");
+                }
             }
-            catch (SqlException e)
-            {
-                Session.Add("Exception", e);
-                return RedirectToAction("Index", "Exception");                
-            }            
+            return RedirectToAction("Index");
         }     
     }
 }

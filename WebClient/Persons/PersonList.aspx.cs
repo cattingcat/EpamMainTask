@@ -33,7 +33,9 @@ namespace WebClient
             try
             {
                 string personId = Request["delete"];
-                if (!string.IsNullOrEmpty(personId))
+                string captcha = Request["captcha"];
+                
+                if (!string.IsNullOrEmpty(captcha) && int.Parse(captcha) == (int)Session["captcha"] && !string.IsNullOrEmpty(personId))
                 {
                     _personAccessor.DeleteById(int.Parse(personId));
                 }

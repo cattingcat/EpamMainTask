@@ -19,6 +19,17 @@
             <tbody runat="server" id="tableBody" enableviewstate="false">
             </tbody>
         </table>
+        <div class="col-sm-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Captcha</h3>
+                </div>
+                <div class="panel-body">
+                    <img src="/captcha.jpg" />
+                    <input type="number" name="captcha" />
+                </div>
+            </div>
+        </div>
     </div>
 </asp:Content>
 

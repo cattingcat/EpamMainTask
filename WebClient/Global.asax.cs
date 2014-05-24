@@ -26,13 +26,6 @@ namespace WebClient
             GlobalLogger.Trace("App start!");          
 
             NinjectKernel = new StandardKernel(new RegisterDependencies());
-
-            //RouteCollection
-            RouteTable.Routes.MapPageRoute("1", "PersonList", "~/Persons/PersonList.aspx");
-            //RouteTable.Routes.MapPageRoute("2", "Persons/{test}", "~/Persons/PersonList.aspx");
-            RouteTable.Routes.MapPageRoute("3", "", "~/Persons/PersonList.aspx");
-            RouteTable.Routes.MapPageRoute("4", "PhoneList", "~/Phones/PhoneList.aspx");
-            RouteTable.Routes.MapPageRoute("5", "ErrorPage/{img}", "~/ErrorPage.aspx");     
         }
 
         protected void Session_Start(object sender, EventArgs e)
