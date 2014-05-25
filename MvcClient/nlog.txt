@@ -545,3 +545,65 @@
 05/25/2014 00:45:38|Trace|Person controller /Details/0
 05/25/2014 00:45:45|Trace|Person controller created
 05/25/2014 00:45:45|Trace|Person controller /Index
+05/25/2014 16:51:57|Trace|Application start!
+05/25/2014 16:51:59|Trace|Ninject module load, current accessor: orm
+05/25/2014 16:51:59|Trace|Person controller created
+05/25/2014 16:51:59|Trace|Person controller /Index
+05/25/2014 16:59:08|Trace|Person controller created
+05/25/2014 16:59:08|Trace|Person controller /Create
+05/25/2014 16:59:11|Trace|Person controller created
+05/25/2014 16:59:11|Trace|Person controller /Create
+05/25/2014 17:00:32|Trace|Application start!
+05/25/2014 17:00:33|Trace|Ninject module load, current accessor: orm
+05/25/2014 17:00:33|Trace|Person controller created
+05/25/2014 17:00:33|Trace|Person controller /Index
+05/25/2014 17:00:38|Trace|Person controller created
+05/25/2014 17:00:38|Trace|Person controller /Create
+05/25/2014 17:00:40|Trace|Person controller created
+05/25/2014 17:00:40|Trace|Person controller /Create
+05/25/2014 17:00:40|Trace|Person controller created
+05/25/2014 17:00:40|Trace|Person controller /Create
+05/25/2014 17:01:02|Trace|Person controller created
+05/25/2014 17:01:02|Trace|Person controller /Create/555 POST
+05/25/2014 17:01:02|Trace|Person controller created
+05/25/2014 17:01:02|Trace|Person controller /Index
+05/25/2014 17:10:31|Trace|Application start!
+05/25/2014 17:10:32|Trace|Ninject module load, current accessor: orm
+05/25/2014 17:10:32|Trace|Person controller created
+05/25/2014 17:10:32|Trace|Person controller /Index
+05/25/2014 17:10:41|Trace|Phone controller created
+05/25/2014 17:10:41|Trace|Phone controller /Index
+05/25/2014 17:10:43|Trace|Phone controller created
+05/25/2014 17:10:43|Trace|Phone controller /Create
+05/25/2014 17:10:52|Trace|Phone controller created
+05/25/2014 17:10:52|Trace|Phone controller /Create POST 444
+05/25/2014 17:10:52|Trace|Phone controller created
+05/25/2014 17:10:52|Trace|Phone controller /Index
+05/25/2014 19:21:17|Trace|Application start!
+05/25/2014 19:21:20|Trace|Ninject module load, current accessor: orm
+05/25/2014 19:21:20|Trace|Person controller created
+05/25/2014 19:21:20|Trace|Person controller /Index
+05/25/2014 19:21:39|Trace|Person controller created
+05/25/2014 19:21:39|Trace|Person controller /Create
+05/25/2014 19:22:26|Trace|Application start!
+05/25/2014 19:22:26|Trace|Ninject module load, current accessor: orm
+05/25/2014 19:22:27|Trace|Person controller created
+05/25/2014 19:22:27|Trace|Person controller /Index
+05/25/2014 19:23:30|Trace|Person controller created
+05/25/2014 19:23:30|Trace|Person controller /Create
+05/25/2014 19:24:26|Trace|Application start!
+05/25/2014 19:24:27|Trace|Ninject module load, current accessor: orm
+05/25/2014 19:24:27|Trace|Person controller created
+05/25/2014 19:24:27|Trace|Person controller /Index
+05/25/2014 19:24:33|Trace|Person controller created
+05/25/2014 19:24:33|Trace|Person controller /Create
+05/25/2014 19:25:09|Trace|Person controller created
+05/25/2014 19:25:09|Trace|Person controller /Create
+05/25/2014 19:26:30|Trace|Application start!
+05/25/2014 19:26:30|Trace|Ninject module load, current accessor: orm
+05/25/2014 19:26:30|Trace|Person controller created
+05/25/2014 19:26:30|Trace|Person controller /Index
+05/25/2014 19:26:36|Trace|Phone controller created
+05/25/2014 19:26:36|Trace|Phone controller /Index
+05/25/2014 19:26:39|Trace|Phone controller created
+05/25/2014 19:26:39|Trace|Phone controller /Create

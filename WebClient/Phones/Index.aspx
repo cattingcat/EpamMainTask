@@ -32,5 +32,9 @@
             </tbody>
         </table>
         <webcl:Captcha id="captcha" runat="server" />
+        <div class="col-sm-4">
+            <h3>Insert phone</h3>
+            <a href="/Phones/Details.aspx" class="btn btn-lg btn-outline" role="button">Create</a>
+        </div>
     </div>
 </asp:Content>

@@ -57,12 +57,15 @@ namespace MvcClient.Controllers
         
         // POST: /Phone/Create
         [HttpPost]
-        public ActionResult Create(Phone phone)
+        public ActionResult Create(Phone phone, int? captcha)
         {
             _logger.Trace("Phone controller /Create POST {0}", phone.Id);
-
-            _phoneBll.AddPhone(phone);
-            return RedirectToAction("Index");
+            if (CaptchaValid(captcha))
+            {
+                _phoneBll.AddPhone(phone);
+                return RedirectToAction("Index");
+            }
+            return View();
         }
         
         // POST: /Phone/Delete/5
@@ -71,11 +74,8 @@ namespace MvcClient.Controllers
         {
             _logger.Trace("Phone controller /Delete/{0}", id);
 
-            object cpt = Session["captcha"];
-
-            if (cpt != null && captcha.HasValue && captcha.Value == (int)cpt)
+            if (CaptchaValid(captcha))
             {
-
                 try
                 {
                     _phoneBll.DeletePhone(id);
@@ -88,6 +88,12 @@ namespace MvcClient.Controllers
                 }
             }
             return RedirectToAction("Index");
-        }     
+        }
+
+        private bool CaptchaValid(int? captcha)
+        {
+            object cpt = Session["captcha"];
+            return (cpt != null && captcha.HasValue && captcha.Value == (int)cpt);
+        }
     }
 }

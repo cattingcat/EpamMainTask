@@ -36,7 +36,8 @@ namespace MvcClient.Controllers
         // GET: /Person/Details/5
         public ActionResult Details(int id)
         {
-            _logger.Trace("Person controller /Details/{0}", id);        
+            _logger.Trace("Person controller /Details/{0}", id);     
+   
             return View(_personBll.GetPerson(id));
         }
         
@@ -50,12 +51,16 @@ namespace MvcClient.Controllers
         
         // POST: /Person/Create
         [HttpPost]
-        public ActionResult Create(Person person)
+        public ActionResult Create(Person person, int? captcha)
         {
             _logger.Trace("Person controller /Create/{0} POST", person.Id);
 
-            _personBll.AddPerson(person);
-            return RedirectToAction("Index");
+            if (CaptchaValid(captcha))
+            {
+                _personBll.AddPerson(person);
+                return RedirectToAction("Index");
+            }
+            return View();
         }
         
         // POST: /Person/Delete/5
@@ -64,9 +69,7 @@ namespace MvcClient.Controllers
         {
             _logger.Trace("Person controller /Delete/{0}", id);
 
-            object cpt = Session["captcha"];
-
-            if (cpt != null && captcha.HasValue && captcha.Value == (int)cpt)
+            if (CaptchaValid(captcha))
             {
                 try
                 {
@@ -83,6 +86,12 @@ namespace MvcClient.Controllers
             {
                 return RedirectToAction("Index");
             }
-        }     
+        }
+
+        private bool CaptchaValid(int? captcha)
+        {
+            object cpt = Session["captcha"];
+            return (cpt != null && captcha.HasValue && captcha.Value == (int)cpt);
+        }
     }
 }

@@ -17,7 +17,9 @@
             <label>Owner:</label>
             <asp:TextBox ID="ownerField" runat="server" />
         </div>
+
         <webcl:Captcha ID="captcha" runat="server" />
+
         <button type="submit" runat="server" onserverclick="Unnamed_ServerClick">Submit</button>
     </div>
 </asp:Content>
