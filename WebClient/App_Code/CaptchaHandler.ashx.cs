@@ -12,7 +12,6 @@ namespace WebClient
 {
     public class CaptchaHandler : IHttpHandler, IRequiresSessionState
     {
-
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "image/jpg";
@@ -41,7 +40,7 @@ namespace WebClient
                 }
             }
 
-            Bitmap bmp = new Bitmap(150, 75);
+            Bitmap bmp = new Bitmap(75, 40);
             Graphics g = Graphics.FromImage(bmp);
             g.Clear(Color.FromArgb(100, rnd.Next(100, 180), 100));
             g.DrawString(captcha.ToString(), font, new SolidBrush(Color.Black), new PointF(0.0F, 0.0F));

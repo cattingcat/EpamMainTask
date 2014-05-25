@@ -517,3 +517,31 @@
 05/23/2014 14:59:57|Trace|Phone controller created
 05/23/2014 14:59:57|Trace|Phone controller /Create
 05/23/2014 15:00:26|Trace|Phone controller created
+05/25/2014 00:39:06|Trace|Application start!
+05/25/2014 00:39:07|Trace|Ninject module load, current accessor: orm
+05/25/2014 00:39:07|Trace|Person controller created
+05/25/2014 00:39:07|Trace|Person controller /Index
+05/25/2014 00:39:18|Trace|Person controller created
+05/25/2014 00:39:18|Trace|Person controller /Create
+05/25/2014 00:42:58|Trace|Application start!
+05/25/2014 00:43:01|Trace|Ninject module load, current accessor: orm
+05/25/2014 00:43:02|Trace|Person controller created
+05/25/2014 00:43:02|Trace|Person controller created
+05/25/2014 00:43:02|Trace|Person controller /Index
+05/25/2014 00:43:02|Trace|Person controller /Create
+05/25/2014 00:43:12|Trace|Phone controller created
+05/25/2014 00:43:12|Trace|Phone controller /Index
+05/25/2014 00:43:15|Trace|Phone controller created
+05/25/2014 00:43:15|Trace|Phone controller /Create
+05/25/2014 00:44:20|Trace|Application start!
+05/25/2014 00:44:21|Trace|Ninject module load, current accessor: orm
+05/25/2014 00:44:21|Trace|Person controller created
+05/25/2014 00:44:21|Trace|Person controller /Index
+05/25/2014 00:44:50|Trace|Person controller created
+05/25/2014 00:44:50|Trace|Person controller /Index
+05/25/2014 00:44:55|Trace|Person controller created
+05/25/2014 00:44:56|Trace|Person controller /Details/0
+05/25/2014 00:45:38|Trace|Person controller created
+05/25/2014 00:45:38|Trace|Person controller /Details/0
+05/25/2014 00:45:45|Trace|Person controller created
+05/25/2014 00:45:45|Trace|Person controller /Index

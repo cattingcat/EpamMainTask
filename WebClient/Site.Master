@@ -1,5 +1,4 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="WebClient.Site" %>
-
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -13,11 +12,8 @@
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
-
 </head>
-
-
-<body onload="init();">
+<body>
     <div class="navbar navbar-inverse">
     <div class="container">
         <div class="navbar-header">
@@ -31,29 +27,19 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/PersonList">Persons</a></li>
-                <li><a href="/PhoneList">Phones</a></li>
+                <li><a href="/Persons/Index.aspx">Persons</a></li>
+                <li><a href="/Phones/Index.aspx">Phones</a></li>
             </ul>
         </div>
     </div>
     </div>
     <div class="container">      
-        <form id="form1" method="post" runat="server">
+        <form id="form2" method="post" runat="server">
             <div>
-                <asp:ContentPlaceHolder ID="FormPlaceHolder" runat="server">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">        
                 </asp:ContentPlaceHolder>
-                <label runat="server" id="elapsedTime"></label>
-            </div>
-
-            <div id='panel'>
-                <div class="form-signin">
-                    <asp:ContentPlaceHolder ID="InsertFieldsPlaceholder" runat="server">
-                    </asp:ContentPlaceHolder>
-                </div>
-            </div>
-            <button type="button" class="btn btn-lg btn-primary" id='click'>Insert </button>
-        </form>
-        
+            </div>            
+        </form>        
     </div>
 </body>
 </html>
