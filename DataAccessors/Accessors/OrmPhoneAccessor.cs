@@ -14,10 +14,7 @@ namespace DataAccessors.Accessors
 
         public OrmPhoneAccessor(string appConfigConnectionString)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings[appConfigConnectionString].ConnectionString;
-            string providerName = ConfigurationManager.ConnectionStrings[appConfigConnectionString].ProviderName;
-            DbProviderFactory factory = DbProviderFactories.GetFactory(providerName);
-            _orm = new MyORM(factory, connectionString, typeof(Phone), typeof(Person));
+            _orm = new MyORM(appConfigConnectionString, typeof(Phone), typeof(Person));
             _orm.RelationsEnabled = true;
         }
 

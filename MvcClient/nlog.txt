@@ -607,3 +607,11 @@
 05/25/2014 19:26:36|Trace|Phone controller /Index
 05/25/2014 19:26:39|Trace|Phone controller created
 05/25/2014 19:26:39|Trace|Phone controller /Create
+06/18/2014 17:18:58|Trace|Application start!
+06/18/2014 17:19:01|Trace|Ninject module load, current accessor: orm
+06/18/2014 17:19:02|Trace|Person controller created
+06/18/2014 17:19:02|Trace|Person controller /Index
+06/18/2014 17:20:36|Trace|Application start!
+06/18/2014 17:20:37|Trace|Ninject module load, current accessor: orm
+06/18/2014 17:20:37|Trace|Person controller created
+06/18/2014 17:20:37|Trace|Person controller /Index

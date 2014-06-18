@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 
 using MyOrm.Attributes;
+using System.Configuration;
 
 namespace MyOrm
 {
@@ -16,16 +17,19 @@ namespace MyOrm
         private string _connectionString;
         public bool RelationsEnabled { get; set; }
 
-        public MyORM(DbProviderFactory factory, string connectionString, params Type[] types)
+        public MyORM(string connectionStringName, params Type[] types)
         {
+            var connectionStringSettings = ConfigurationManager.ConnectionStrings[connectionStringName];
+
+            _factory = DbProviderFactories.GetFactory(connectionStringSettings.ProviderName);
+
             _mappingPool = new Dictionary<Type, OrmMap>();
-            _factory = factory;
-            _connectionString = connectionString;
+            _connectionString = connectionStringSettings.ConnectionString;
             foreach (Type type in types)
             {
                 RegisterType(type);
             }
-            RelationsEnabled = true;
+            RelationsEnabled = false;
         }
 
         public void RegisterType(Type type)
