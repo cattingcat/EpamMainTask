@@ -47,9 +47,16 @@
     <Compile Include="Attributes\RelationAttribute.cs" />
     <Compile Include="Attributes\TableAttribute.cs" />
     <Compile Include="DbReaderAdapter.cs" />
+    <Compile Include="DefaultMappingPool.cs" />
+    <Compile Include="IMappingPool.cs" />
+    <Compile Include="IOrm.cs" />
     <Compile Include="MyORM.cs" />
     <Compile Include="OrmMap.cs" />
+    <Compile Include="OrmMapClasses\RelationManyColumnInfo.cs" />
+    <Compile Include="OrmMapClasses\SimpleColumnInfo.cs" />
+    <Compile Include="OrmMapClasses\TableInfo.cs" />
     <Compile Include="OrmMapExtension.cs" />
+    <Compile Include="OrmEnumerable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

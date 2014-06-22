@@ -2,114 +2,128 @@
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Reflection;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace MyOrm
 {
-    internal class DbReaderAdapter
+    internal class DbReaderAdapter<T> where T : class, new()
     {
         private DbDataReader _reader;
-        private OrmMap _map;
+        private OrmMap _mainMap;
+        private IMappingPool _pool;
 
-        public DbReaderAdapter(DbDataReader reader, OrmMap map)
+        public DbReaderAdapter(DbDataReader reader, IMappingPool pool)
         {
             _reader = reader;
-            _map = map;
+            _mainMap = pool.GetMap<T>();
+            _pool = pool;
         }
 
-        public T GetSingleResult<T>() where T: class, new()
+        private object ReadFields(OrmMap map, ref int readerOffset)
         {
-            while (_reader.Read())
+            Type resultType = map.TableInfo.Type;
+            object res = Activator.CreateInstance(resultType);            
+            
+            foreach (string column in map.Columns)
             {
-                T o = new T();
-                for (int i = 0; i < _reader.FieldCount; ++i)
-                {                  
-                    string column = _reader.GetName(i);
-                    PropertyInfo info = _map[column];
-                    object value = _reader.GetValue(i);
-                    if (value != DBNull.Value)
-                    {
-                        info.SetValue(o, value);
-                    }
-                    else
-                    {
-                        info.SetValue(o, null);
-                    }                    
-                }
-                return o;
-            }
-            return null;
-        }
-
-        public IEnumerable<T> GetMultipleResult<T>() where T : class, new()
-        {
-            List<T> result = new List<T>();
-            while (_reader.Read())
-            {
-                T o = new T();
-                for (int i = 0; i < _reader.FieldCount; ++i)
+                PropertyInfo info = map[column].PropertyInfo;
+                object value = _reader.GetValue(readerOffset);
+                if (value != DBNull.Value)
                 {
-                    string column = _reader.GetName(i);
-                    PropertyInfo info = _map[column];
-                    object value = _reader.GetValue(i);
-                    if (value != DBNull.Value)
-                    {
-                        info.SetValue(o, value);
-                    }
-                    else
-                    {
-                        info.SetValue(o, null);
-                    }
+                    info.SetValue(res, value);
                 }
-                result.Add(o);
+                else
+                {
+                    info.SetValue(res, null);
+                }
+                ++readerOffset;
             }
+            return res;
+        }
+
+        public IEnumerable<T> GetResult()
+        {
+            ICollection<T> result = new List<T>();
+            int readerOffset = 0;
+
+            T currentResult = null;
+
+            while (_reader.Read())
+            {
+                T obj = (T)ReadFields(_mainMap, ref readerOffset);
+
+                if (currentResult == null)
+                {
+                    currentResult = obj;
+                }
+                else if (!_mainMap.Id.PropertyInfo.GetValue(currentResult).Equals(_mainMap.Id.PropertyInfo.GetValue(obj)))
+                {
+                    result.Add(currentResult);
+                    currentResult = obj;
+                }
+
+                foreach (var relation in _mainMap.ManyRelations)
+                {
+                    OrmMap innerMap = _pool.GetMap(relation.SecondTable);
+                    Type collectionType = typeof(List<>).MakeGenericType(relation.CollectionGenericArgument);
+
+                    object innerObj = ReadFields(innerMap, ref readerOffset);
+
+                    object collection = relation.PropertyInfo.GetValue(currentResult);
+                    if (collection == null)
+                    {                        
+                        collection = Activator.CreateInstance(collectionType);
+                        relation.PropertyInfo.SetValue(obj, collection);
+                    }                    
+
+                    collectionType.GetMethod("Add").Invoke(collection, new[] { innerObj });
+                }
+                readerOffset = 0;
+            }
+
+            result.Add(currentResult);
+
             return result;
         }
 
-        public object GetSingleResult()
+        public IEnumerable<T> GetResultLazy(MyORM orm)
         {
-            while (_reader.Read())
-            {
-                object o = Activator.CreateInstance(_map.ObjectType);
-                for (int i = 0; i < _reader.FieldCount; ++i)
-                {
-                    string column = _reader.GetName(i);
-                    PropertyInfo info = _map[column];
-                    object value = _reader.GetValue(i);
-                    if (value != DBNull.Value)
-                    {
-                        info.SetValue(o, value);
-                    }
-                    else
-                    {
-                        info.SetValue(o, null);
-                    }
-                }
-                return o;
-            }
-            return null;
-        }
+            ICollection<T> result = new List<T>();
+            int readerOffset = 0;
 
-        public IEnumerable<object> GetMultipleResult()
-        {
-            List<object> result = new List<object>();
             while (_reader.Read())
             {
-                object o = Activator.CreateInstance(_map.ObjectType);
-                for (int i = 0; i < _reader.FieldCount; ++i)
+                T obj = (T)ReadFields(_mainMap, ref readerOffset);
+
+                result.Add(obj);
+                readerOffset = 0;
+
+                foreach (var relation in _mainMap.ManyRelations)
                 {
-                    string column = _reader.GetName(i);
-                    PropertyInfo info = _map[column];
-                    object value = _reader.GetValue(i);
-                    if (value != DBNull.Value)
+                    string where = String.Format("{0}.{1}=@id", relation.SecondTable, relation.ForeignKey);
+                    string strCommand = _pool.GetMap(relation.SecondTable).BuildSelectWhereQuery(where);
+
+                    DbCommand command = orm.ProviderFactory.CreateCommand();
+                    command.CommandText = strCommand;
+                    DbParameter param = command.CreateParameter();
+                    param.ParameterName = "@id";
+                    param.DbType = _mainMap.Id.DbType;
+                    param.Value = _mainMap.Id.PropertyInfo.GetValue(obj);
+                    command.Parameters.Add(param);
+
+                    object collection = typeof(OrmEnumerable<>).MakeGenericType(_pool.GetMap(relation.SecondTable).TableInfo.Type).
+                        GetConstructor(new[] { typeof(MyORM), typeof(DbCommand) }).Invoke(new object[] { orm, command });
+
+                    if (relation.CollectionType == typeof(IEnumerable<>))
                     {
-                        info.SetValue(o, value);
+                        relation.PropertyInfo.SetValue(obj, collection);
                     }
                     else
                     {
-                        info.SetValue(o, null);
+                        // TODO not IEnumerable lazy collection
                     }
                 }
-                result.Add(o);
             }
             return result;
         }

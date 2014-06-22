@@ -615,3 +615,7 @@
 06/18/2014 17:20:37|Trace|Ninject module load, current accessor: orm
 06/18/2014 17:20:37|Trace|Person controller created
 06/18/2014 17:20:37|Trace|Person controller /Index
+06/22/2014 14:13:50|Trace|Application start!
+06/22/2014 14:13:54|Trace|Ninject module load, current accessor: orm
+06/22/2014 14:13:55|Trace|Person controller created
+06/22/2014 14:13:55|Trace|Person controller /Index

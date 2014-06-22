@@ -6,77 +6,86 @@ using System.Reflection;
 using System.Text;
 
 using MyOrm.Attributes;
+using MyOrm.OrmMapClasses;
 using System.Configuration;
 
 namespace MyOrm
 {
-    public class MyORM
-    {
-        private IDictionary<Type, OrmMap> _mappingPool;
-        private DbProviderFactory _factory;
-        private string _connectionString;
-        public bool RelationsEnabled { get; set; }
+    public class MyORM: IOrm
+    {        
+        internal DbProviderFactory ProviderFactory { get; private set; }
+        internal IMappingPool MappingPool { get; private set; }
+
+        private string _connectionString;        
+
+        public bool Lazy { get; set; }
+        public Action<string> Log { get; set; }
+
 
         public MyORM(string connectionStringName, params Type[] types)
         {
             var connectionStringSettings = ConfigurationManager.ConnectionStrings[connectionStringName];
 
-            _factory = DbProviderFactories.GetFactory(connectionStringSettings.ProviderName);
-
-            _mappingPool = new Dictionary<Type, OrmMap>();
+            ProviderFactory = DbProviderFactories.GetFactory(connectionStringSettings.ProviderName);
+            MappingPool = new DefaultMappingPool();            
+            
             _connectionString = connectionStringSettings.ConnectionString;
+
+            Lazy = false;
+
             foreach (Type type in types)
             {
-                RegisterType(type);
+                MappingPool.RegisterType(type);
             }
-            RelationsEnabled = false;
         }
+        
 
-        public void RegisterType(Type type)
+        #region IOrm
+        public IEnumerable<T> SelectAll<T>() where T : class, new()
         {
-            OrmMap map = null;
-            if (!_mappingPool.ContainsKey(type))
+            OrmMap map = MappingPool.GetMap<T>();
+
+            string selectQuery = String.Empty;
+            if (!Lazy)
             {
-                map = OrmMap.FromType(type);
-                _mappingPool[type] = map;
+                selectQuery = map.BuildSelectAllQuery();
             }
             else
             {
-                map = _mappingPool[type];
+                selectQuery = map.BuildSelectAllQueryLazy();
             }
-        }
+            
+            DbCommand command = ProviderFactory.CreateCommand();
+            command.CommandText = selectQuery;
 
-        public IEnumerable<T> SelectAll<T>() where T : class, new()
-        {
-            OrmMap map = _mappingPool[typeof(T)];
-            string selectQuery = map.BuildSelectAllQuery();
             IEnumerable<T> result = null;
             using (DbConnection connection = GetOpenConnection())
             {
-                DbCommand command = connection.CreateCommand();
-                command.CommandText = map.BuildSelectAllQuery();
-                
+                DoLog(command.CommandText);
+
+                command.Connection = connection;
                 using (DbDataReader reader = command.ExecuteReader())
                 {
-                    DbReaderAdapter adapter = new DbReaderAdapter(reader, map);
-                    result = adapter.GetMultipleResult<T>();
-                }
-                if (RelationsEnabled)
-                {
-                    foreach(T res in result)
+                    DbReaderAdapter<T> adapter = new DbReaderAdapter<T>(reader, MappingPool);
+                    if(!Lazy)
                     {
-                        PerformSelectRelation(map, res, connection);
-                    }                    
+                        result = adapter.GetResult();
+                    }
+                    else
+                    {
+                        result = adapter.GetResultLazy(this);
+                    }
                 }
             }
+
             return result;
         }
 
         public T SelectById<T>(object id) where T: class, new()
         {            
-            OrmMap map = _mappingPool[typeof(T)];            
-            string whereStatement = String.Format("{0}=@id", map.ID);
-            string selectQuery = map.BuildSelectWhereQuery(whereStatement);        
+            OrmMap map = MappingPool.GetMap<T>();            
+            string whereStatement = String.Format("{0}.{1}=@id", map.TableInfo.DbTableName, map.Id.DbColumnName);
+            string selectQuery = map.BuildSelectAllQuery(whereStatement);        
 
             using (DbConnection connection = GetOpenConnection())
             {
@@ -84,21 +93,22 @@ namespace MyOrm
                 command.CommandText = selectQuery;
 
                 DbParameter param = command.CreateParameter();
-                param.DbType = map.GetDbType(map.ID);
+                param.DbType = map.Id.DbType;
                 param.ParameterName = "@id";
                 param.Value = id;
                 command.Parameters.Add(param);
 
+                DoLog(command.CommandText);
+
                 T result = null;
                 using (DbDataReader reader = command.ExecuteReader())
                 {
-                    DbReaderAdapter adapter = new DbReaderAdapter(reader, map);
-                    result = adapter.GetSingleResult<T>();
+                    DbReaderAdapter<T> adapter = new DbReaderAdapter<T>(reader, MappingPool);
+                    result = adapter.GetResult().First();
                 }
-                if (RelationsEnabled)
-                {
-                    PerformSelectRelation(map, result, connection);
-                }
+
+                ResolveManyAttribute(result);
+
                 return result;
             }
         }
@@ -106,7 +116,7 @@ namespace MyOrm
         public int Insert(object o)
         {
             Type type = o.GetType();
-            OrmMap map = _mappingPool[type];            
+            OrmMap map = MappingPool.GetMap(type);            
             StringBuilder argListBuilder = new StringBuilder();
             List<KeyValuePair<string, string>> colNameToNamedParam = new List<KeyValuePair<string, string>>();
 
@@ -128,19 +138,22 @@ namespace MyOrm
                 foreach (var pair in colNameToNamedParam)
                 {
                     DbParameter param = command.CreateParameter();
-                    param.DbType = map.GetDbType(pair.Key);
+                    param.DbType = map[pair.Key].DbType;
                     param.ParameterName = pair.Value;
-                    param.Value = map[pair.Key].GetValue(o) ?? DBNull.Value;                    
+                    param.Value = map[pair.Key].PropertyInfo.GetValue(o) ?? DBNull.Value;                    
                     command.Parameters.Add(param);
                 }
+
+                DoLog(command.CommandText);
+
                 return command.ExecuteNonQuery();
             }
         }
 
         public int Delete<T>(object id) where T : class, new()
         {
-            OrmMap map = _mappingPool[typeof(T)];            
-            string whereStatement = String.Format("{0}=@id", map.ID);
+            OrmMap map = MappingPool.GetMap<T>();            
+            string whereStatement = String.Format("{0}=@id", map.Id);
 
             string deleteQuery = map.BuildDeleteQuery(whereStatement);
 
@@ -150,103 +163,85 @@ namespace MyOrm
                 command.CommandText = deleteQuery;
 
                 DbParameter param = command.CreateParameter();
-                param.DbType = map.GetDbType(map.ID);
+                param.DbType = map.Id.DbType;
                 param.ParameterName = "@id";
                 param.Value = id;
                 command.Parameters.Add(param);
 
+                DoLog(command.CommandText);
+
                 return command.ExecuteNonQuery();
             }
         }
+        #endregion
 
-
-        private DbConnection GetOpenConnection()
+        #region Helpers
+        internal DbConnection GetOpenConnection()
         {
-            DbConnection connection = _factory.CreateConnection();
+            DoLog("Connection opened!");
+
+            DbConnection connection = ProviderFactory.CreateConnection();
             connection.ConnectionString = _connectionString;
             connection.Open();
             return connection;
         }
 
-        private void PerformSelectRelation(OrmMap containerMap, object containerObj, DbConnection connection)
+        internal void DoLog(string message)
         {
-            foreach (string relation in containerMap.Relations)
+            if (Log != null)
+                Log(message);
+        }
+
+
+        private IEnumerable<T> GetEnumerable<T>() where T : class, new()
+        {
+            return new OrmEnumerable<T>(this);
+        }
+
+
+        internal void ResolveManyAttribute(object o)
+        {
+            if (!Lazy)
+                return;
+
+            OrmMap map = MappingPool.GetMap(o.GetType());
+            foreach (RelationManyColumnInfo relation in map.ManyRelations)
             {
-                PropertyInfo p = containerMap[relation, ColumnType.Relation];
-                RelationAttribute attr = p.GetCustomAttribute<RelationAttribute>();
+                string secondTable = relation.SecondTable;
+                string secondTbsFK = relation.ForeignKey;
+                // SELECT * FROM {{secondTable}} where {{secondTbsFK}} == %firstTableKey%;
 
-                string secondTable = attr.SecondTable;
-                string secondColumn = attr.SecondColumn;
-                string thisColumn = attr.ThisColumn;
-                OrmMap innerMap = (from m in _mappingPool.Values where m.TableName == secondTable select m).FirstOrDefault<OrmMap>();
-                object containerId = containerMap.GetId(containerObj);
+                object firstTableKeyValue = map.GetId(o);
+                OrmMap secondTableMap = 
+                    (from m in MappingPool
+                        where m.TableInfo.DbTableName == secondTable select m).First();
 
-                if (attr.Type == RelationType.One)
-                {                 
-                    // SELECT person_id FROM PhoneTbl WHERE id = parentId
-                    // sub query
-                    string subQueryWhereSection = containerMap.ID + " = @relationVal";
-                    string subQuery = containerMap.BuildSubSelectQuery(thisColumn, subQueryWhereSection);
+                string selectQuery = secondTableMap.BuildSelectWhereQuery(String.Format("{0}=@pk", secondTbsFK));
 
-                    string whereStatement = String.Format("{0}={1}", secondColumn ?? innerMap.ID, subQuery);
-                    string selectQuery = innerMap.BuildSelectWhereQuery(whereStatement);
+                DbCommand comm = ProviderFactory.CreateCommand();
+                comm.CommandText = selectQuery;
+                DbParameter param = comm.CreateParameter();
+                param.DbType = map.Id.DbType;
+                param.Value = firstTableKeyValue;
+                param.ParameterName = "@pk";
+                comm.Parameters.Add(param);
 
-                    DbCommand command = connection.CreateCommand();
-                    command.CommandText = selectQuery;
+                Type enumerableType = typeof(OrmEnumerable<>).MakeGenericType(secondTableMap.TableInfo.Type);
+                object enumerable = enumerableType.GetConstructor(new[] { typeof(MyORM), typeof(DbCommand) }).Invoke(new object[]{ this, comm});                
 
-                    DbParameter param = command.CreateParameter();
-                    param.DbType = innerMap.GetDbType(innerMap.ID);
-                    param.ParameterName = "@relationVal";
-                    param.Value = containerId;
-                    command.Parameters.Add(param);
-
-                    object innerObj = null;
-                    using (DbDataReader reader = command.ExecuteReader())
-                    {
-                        DbReaderAdapter adapter = new DbReaderAdapter(reader, innerMap);
-                        innerObj = adapter.GetSingleResult();
-                    }
-                    p.SetValue(containerObj, innerObj);
-                }
-                else if (attr.Type == RelationType.Many)
+                if (relation.CollectionType == typeof(IEnumerable<>))
                 {
-                    string whereSection = String.Format("{0} = @relationVal", secondColumn);
-                    string selectQuery = innerMap.BuildSelectWhereQuery(whereSection);
-
-                    DbCommand command = connection.CreateCommand();
-                    command.CommandText = selectQuery;
-
-                    DbParameter param = command.CreateParameter();
-                    param.DbType = containerMap.GetDbType(containerMap.ID);
-                    param.ParameterName = "@relationVal";
-                    param.Value = containerId;
-                    command.Parameters.Add(param);
-
-                    IEnumerable<object> innerCollection = null;
-                    using (DbDataReader reader = command.ExecuteReader())
-                    {
-                        DbReaderAdapter adapter = new DbReaderAdapter(reader, innerMap);
-                        innerCollection = adapter.GetMultipleResult();
-                    }
-                    foreach (object o in innerCollection)
-                    {
-                        PerformSelectRelation(innerMap, o, connection);
-                    }
-
-                    // // // // // // // // // // // //
-                    Type t = typeof(List<>).MakeGenericType(innerMap.ObjectType);
-                    dynamic collection = Activator.CreateInstance(t);
-                    foreach (object o in innerCollection)
-                    {
-                        dynamic _do = Convert.ChangeType(o, innerMap.ObjectType);
-                        collection.Add(_do);
-                    }
-                    p.SetValue(containerObj, collection);
-
-                    // code with exception
-                    //p.SetValue(containerObj, Convert.ChangeType(innerCollection, p.PropertyType));
+                    relation.PropertyInfo.SetValue(o, enumerable);
                 }
+                else if (relation.CollectionType == typeof(ICollection<>))
+                {          
+                    MethodInfo method = typeof(Enumerable).GetMethod("ToList");
+                    object icollection = method.MakeGenericMethod(relation.CollectionGenericArgument).Invoke(null, new object[] { enumerable });
+
+                    relation.PropertyInfo.SetValue(o, icollection);
+                }                
             }
         }
+        #endregion
     }
 }

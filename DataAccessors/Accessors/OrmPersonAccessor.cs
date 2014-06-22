@@ -16,7 +16,7 @@ namespace DataAccessors.Accessors
         public OrmPersonAccessor(string appConfigConnectionString)
         {
             _orm = new MyORM(appConfigConnectionString, typeof(Person), typeof(Phone));
-            _orm.RelationsEnabled = true;
+            _orm.Lazy = false;
         }
 
 
